@@ -1,10 +1,13 @@
+
 # References
 * https://www.geeksforgeeks.org/compilation-execution-java-program/
 * http://crackingjavainterviews.blogspot.com/2013/04/what-are-four-principles-of-oop.html
 * https://blog.csdn.net/jackfrued/article/details/44921941
 
 # Table of Contents
-- [1. How Java Compiles](#1-how-java-compiles)
+- [1. Java Overview](#1-java-overview)
+  * [1.1 How Java Compiles](#11-how-java-compiles)
+  * [1.2 Java vs Python](#12-java-vs-python)
 - [2. OOP Concepts](#2-oop-concepts)
   * [2.1 Definition](#21-definition)
   * [2.2 Four Basic Concepts](#22-four-basic-concepts)
@@ -47,8 +50,8 @@
 - [7. Reusing Classes](#7-reusing-classes)
   * [7.1 Composition](#71-composition)
   * [7.2 Inheitance](#72-inheitance)
-  * [7.2.1 Initialize base class](#721-initialize-base-class)
-  * [7.2.2 Name Hiding](#722-name-hiding)
+    + [7.2.1 Initialize base class](#721-initialize-base-class)
+    + [7.2.2 Name Hiding](#722-name-hiding)
   * [7.3 Composition vs Inheritance](#73-composition-vs-inheritance)
   * [7.4 Protected and Private](#74-protected-and-private)
   * [7.5 Upcasting a class](#75-upcasting-a-class)
@@ -85,12 +88,25 @@
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
-# 1. How Java Compiles
+
+
+# 1. Java Overview
+## 1.1 How Java Compiles
 * Javac.exe compiles source file (.java) into byte code files (.class). Pass this file to JVM
 * There are three stages executed in JVM:
     * Load main class 
     * Bytecode Verifier (initialize, type checking)
     * Just-In-Time Compiler (JIT) translates code into machine code
+
+## 1.2 Java vs Python
+| Category | Java | Python |
+| ---- | ---- | ---- |
+| Variable Type | statically typed, compiled language | dynamically typed, non-compiled (scripting)|
+| | In Java, all variable names (along with their types) must be explicitly declared. Attempting to assign an object of the wrong type to a variable name triggers a type exception.| In Python, you never declare anything. An assignment statement binds a name to an object, and the object can be of any type. |
+| Style | verbose | concise |
+| | containing more words than are necessary| expressing much in a few words. Implies clean-cut brevity|
+| Speed | In general Java is faster | Python is slower|
+| Cross-Platform| Java is translated into Java Byte code| Python relies on compiler that can turn Python code into code that your particular operating system can understand.|
     
 # 2. OOP Concepts
 ## 2.1 Definition
@@ -508,7 +524,7 @@ class A extends B{
 super.scrub()
 ```
 
-## 7.2.1 Initialize base class
+### 7.2.1 Initialize base class
 Java automatically calls constructor of super class of no parameter. If we want to call parameterized contructor of base class, then we can call it using super(). The point to note is **base class constructor call must be the first line in derived class constructor**.
 ```java
 // filename: Main.java
@@ -538,7 +554,7 @@ public class Main {
 }
 ```
 
-## 7.2.2 Name Hiding
+### 7.2.2 Name Hiding
 Overloading a method that exist in super class does not hide overloaded methods in super class. Example:
 ```java
 class Homer {
