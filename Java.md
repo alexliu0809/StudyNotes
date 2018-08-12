@@ -4,6 +4,7 @@
 * http://crackingjavainterviews.blogspot.com/2013/04/what-are-four-principles-of-oop.html
 * https://blog.csdn.net/jackfrued/article/details/44921941
 
+# Table of Contents
 - [1. Java Overview](#1-java-overview)
   * [1.1 How Java Compiles](#11-how-java-compiles)
   * [1.2 Java vs Python](#12-java-vs-python)
@@ -1980,3 +1981,9 @@ Daemon thread is a low priority thread that runs in background to perform tasks 
 
 ## 12.8 Advanced Multithreading
 Semaphore,CyclicBarrier,CountDownLatch,ReadWriteLock,BlockingQueue
+
+## TODO
+SQL + List/Set/Map
+#https://www.javatpoint.com/java-collections-interview-questions
+#https://www.baeldung.com/java-collections-interview-questions
+#https://www.journaldev.com/1330/java-collections-interview-questions-and-answers#compable-comparator
