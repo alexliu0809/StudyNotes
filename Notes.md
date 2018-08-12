@@ -4,16 +4,17 @@
 * http://crackingjavainterviews.blogspot.com/2013/04/what-are-four-principles-of-oop.html
 * https://blog.csdn.net/jackfrued/article/details/44921941
 
-# Table of Contents
 - [1. Java Overview](#1-java-overview)
   * [1.1 How Java Compiles](#11-how-java-compiles)
   * [1.2 Java vs Python](#12-java-vs-python)
+  * [1.3 JRE, JDK, JVM](#13-jre--jdk--jvm)
 - [2. OOP Concepts](#2-oop-concepts)
   * [2.1 Definition](#21-definition)
   * [2.2 Four Basic Concepts](#22-four-basic-concepts)
 - [3. Objects](#3-objects)
   * [3.1 Storage of Objects](#31-storage-of-objects)
   * [3.2 Primitive Types](#32-primitive-types)
+    + [3.2.1 Wrapper classes](#321-wrapper-classes)
   * [3.3 Array of Objects](#33-array-of-objects)
   * [3.4 Scoping](#34-scoping)
   * [3.5 Class](#35-class)
@@ -48,7 +49,10 @@
   * [6.3 Access Specifiers](#63-access-specifiers)
   * [6.4 Class Access](#64-class-access)
 - [7. Reusing Classes](#7-reusing-classes)
-  * [7.1 Composition](#71-composition)
+  * [7.1 Association, Composition and Aggregation](#71-association--composition-and-aggregation)
+    + [7.1.1 Association](#711-association)
+    + [7.1.2 Aggregation](#712-aggregation)
+    + [7.1.3 Composition](#713-composition)
   * [7.2 Inheitance](#72-inheitance)
     + [7.2.1 Initialize base class](#721-initialize-base-class)
     + [7.2.2 Name Hiding](#722-name-hiding)
@@ -80,14 +84,40 @@
 - [10. Exceptions](#10-exceptions)
   * [10.1 Cathing an exception](#101-cathing-an-exception)
   * [10.2 Creating an exception](#102-creating-an-exception)
+  * [10.3 Exception vs Error](#103-exception-vs-error)
 - [11. Serialization and Deserialization](#11-serialization-and-deserialization)
   * [11.1 Use Serialization](#111-use-serialization)
   * [11.2 Why Serialization](#112-why-serialization)
   * [11.3 Externalizable](#113-externalizable)
   * [11.4 Cloneable](#114-cloneable)
+- [12. Multithreading](#12-multithreading)
+  * [12.1 Thread Class vs Runnable Interface](#121-thread-class-vs-runnable-interface)
+    + [12.1.1 Extending the Thread class](#1211-extending-the-thread-class)
+    + [12.1.2 Implementing the Runnable Interface](#1212-implementing-the-runnable-interface)
+    + [12.1.3 Thread Class vs Runnable Interface](#1213-thread-class-vs-runnable-interface)
+  * [12.2 Life Cycle of A Thread](#122-life-cycle-of-a-thread)
+  * [12.3 Main Thread](#123-main-thread)
+    + [12.3.1 Property](#1231-property)
+    + [12.3.2 Controlling Main thread](#1232-controlling-main-thread)
+    + [12.3.3 Main Thread and Main Function](#1233-main-thread-and-main-function)
+  * [12.4 Volatile vs Synchronized](#124-volatile-vs-synchronized)
+    + [12.4.1 Synchronized](#1241-synchronized)
+    + [12.4.2 Volatile Keyword](#1242-volatile-keyword)
+    + [12.4.3 Volatile vs Synchronized](#1243-volatile-vs-synchronized)
+  * [12.5 Thread Related Methods](#125-thread-related-methods)
+    + [12.5.1 Single-Thread Methods](#1251-single-thread-methods)
+      - [12.5.1.1 yield](#12511-yield)
+      - [12.5.1.2 sleep](#12512-sleep)
+      - [12.5.1.3 yield vs sleep](#12513-yield-vs-sleep)
+      - [12.5.1.4 join](#12514-join)
+    + [12.5.2 Inter-thread Methods](#1252-inter-thread-methods)
+      - [12.5.2.1 Polling](#12521-polling)
+      - [12.5.2.2 Polling in Multithreading](#12522-polling-in-multithreading)
+  * [12.6 ReentrantLock](#126-reentrantlock)
+  * [12.7 Daemon thread](#127-daemon-thread)
+  * [12.8 Advanced Multithreading](#128-advanced-multithreading)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
 
 
 # 1. Java Overview
@@ -107,6 +137,13 @@
 | | containing more words than are necessary| expressing much in a few words. Implies clean-cut brevity|
 | Speed | In general Java is faster | Python is slower|
 | Cross-Platform| Java is translated into Java Byte code| Python relies on compiler that can turn Python code into code that your particular operating system can understand.|
+
+## 1.3 JRE, JDK, JVM
+* JVM is an acronym for Java Virtual Machine, it is an abstract machine which provides the runtime environment in which java bytecode can be executed. It is a specification. JVMs are available for many hardware and software platforms (so JVM is platform dependent).
+
+* JRE stands for Java Runtime Environment. It is the implementation of JVM.
+
+* JDK is an acronym for Java Development Kit. It physically exists. It contains JRE + development tools.
     
 # 2. OOP Concepts
 ## 2.1 Definition
@@ -128,6 +165,13 @@ In OOP languages, programmers define**not only the data type of a data structure
 
 ## 3.2 Primitive Types
 8 primitive types (digits, chars, byte and boolean): byte、short、int、long、float、double、char、boolean. **No reference** is created for primitive types. **String** is not primitive. Java also have high-precision classes like BigInteger and BigDecimal
+
+### 3.2.1 Wrapper classes
+A Wrapper class is a class whose object wraps or contains a primitive data types. When we create an object to a wrapper class, it contains a field and in this field, we can store a primitive data types.
+* They convert primitive data types into objects. Objects are needed if we wish to modify the arguments passed into a method (because primitive types are passed by value).
+* The classes in java.util package handles only objects and hence wrapper classes help in this case also.
+* Data structures in the Collection framework, such as ArrayList and Vector, store only objects (reference types) and not primitive types.
+* An object is needed to support synchronization in multithreading.
 
 ## 3.3 Array of Objects
 When creating an array of objects, you **actually create an array of references**, each reference is initialized to null. You can create an array of primitives, the compiler zeros the memory.
@@ -472,8 +516,20 @@ Two ways of reusing classes
 1. Composition
 2. Inheritance
 
-## 7.1 Composition
-One class contain another class directly. It represents part-of relationship. In composition, both the entities are dependent on each other. Example:
+## 7.1 Association, Composition and Aggregation
+### 7.1.1 Association
+Association is relation between two separate classes which establishes through their Objects. Association can be one-to-one, one-to-many, many-to-one, many-to-many. (student - teacher)
+
+### 7.1.2 Aggregation
+It is a special form of Association where:
+
+* It represents Has-A relationship.
+* It is a unidirectional association i.e. a one way relationship. For example, department can have students but vice versa is not possible and thus unidirectional in nature.
+* In Aggregation, both the entries can survive individually which means ending one entity will not effect the other entity
+
+
+### 7.1.3 Composition
+Composition is a **restricted form of Aggregation** in which two entities are highly dependent on each other. One class contain another class directly. It represents part-of relationship. In composition, both the entities are dependent on each other. When there is a composition between two entities, the composed object cannot exist without the other entity. Example:
 ```java
 // class book
 class Book 
@@ -1057,6 +1113,20 @@ class tst
 }
 ```
 
+Comparison:
+
+|Throw| Throws|
+| --- | ------|
+|throw is used to explicitly throw an exception|throws is used to declare an exception|
+|throw is used within the method|throws is used with the method signature|
+|You cannot throw multiple exception|You can declare multiple exception e.g. public void method()throws IOException,SQLException.|
+
+
+## 10.3 Exception vs Error
+An error is an irrecoverable condition occurring at runtime. Such as OutOfMemory error. 
+
+While exceptions are conditions that occur because of bad input or human error etc. e.g. FileNotFoundException will be thrown if the specified file does not exist.
+
 # 11. Serialization and Deserialization
 [Reference](https://www.geeksforgeeks.org/serialization-in-java/)
 
@@ -1196,6 +1266,717 @@ Externalization serves the purpose of custom Serialization.
 ## 11.4 Cloneable
 For clone an object.
 
+# 12. Multithreading
+## 12.1 Thread Class vs Runnable Interface
+Threads can be created by using two mechanisms:
+1. Extending the Thread class
+2. Implementing the Runnable Interface
 
-## TODO
-SQL + THREADING + List/Set/Map
+### 12.1.1 Extending the Thread class
+We create a class that extends the java.lang.Thread class. This class **overrides the run()** method available in the Thread class. A thread begins its life inside run() method. We create an object of our new class and **call start()** method to start the execution of a thread. Start() invokes the run() method on the Thread object.
+```java
+class MultithreadingDemo extends Thread
+{
+    public void run()
+    {
+        try
+        {
+            // Displaying the thread that is running
+            System.out.println ("Thread " +
+                  Thread.currentThread().getId() +
+                  " is running");
+ 
+        }
+        catch (Exception e)
+        {
+            // Throwing an exception
+            System.out.println ("Exception is caught");
+        }
+    }
+}
+ 
+// Main Class
+public class Multithread
+{
+    public static void main(String[] args)
+    {
+        int n = 8; // Number of threads
+        for (int i=0; i<8; i++)
+        {
+            MultithreadingDemo object = new MultithreadingDemo();
+            object.start(); //Directly call start
+        }
+    }
+}
+```
+
+### 12.1.2 Implementing the Runnable Interface
+We create a new class which implements java.lang.Runnable interface and **override run()** method. Then we instantiate a Thread object and **call start()** method on this object.
+```java
+class MultithreadingDemo implements Runnable
+{
+    public void run()
+    {
+        try
+        {
+            // Displaying the thread that is running
+            System.out.println ("Thread " +
+                                Thread.currentThread().getId() +
+                                " is running");
+ 
+        }
+        catch (Exception e)
+        {
+            // Throwing an exception
+            System.out.println ("Exception is caught");
+        }
+    }
+}
+ 
+// Main Class
+class Multithread
+{
+    public static void main(String[] args)
+    {
+        int n = 8; // Number of threads
+        for (int i=0; i<8; i++)
+        {
+            Thread object = new Thread(new MultithreadingDemo());
+            object.start();
+        }
+    }
+}
+```
+
+### 12.1.3 Thread Class vs Runnable Interface
+1. If we extend the Thread class, our class cannot extend any other class because Java doesn’t support multiple inheritance. But, if we implement the Runnable interface, our class can still extend other base classes.
+
+2. We can achieve basic functionality of a thread by extending Thread class because it provides some inbuilt methods like **yield()** etc. that are **not available in Runnable interface**.
+
+3. If you implement runnable interface, you need to create this class by **wrapping a thread class**. By contrast, you can instantiate a extended class directly.
+
+## 12.2 Life Cycle of A Thread
+A thread lies only in one of the shown states at any instant:
+* New: The thread has not yet started to run when thread is in this state. It’s code is yet to be run and **hasn’t started to execute**.
+* Runnable: either **running or ready to run** just waiting for cpu
+* Blocked: Waiting for lock
+* Waiting: Thread.join() with no timeout or Object.wait with no timeout
+* Timed Waiting: Sleep() or Object.wait with timeout or Thread.join() with timeout
+* Terminated: Ended
+
+## 12.3 Main Thread
+When a Java program starts up, one thread begins running immediately. This is usually called the **main thread** of our program.
+
+### 12.3.1 Property
+1. It is the thread from which other “child” threads will be spawned
+2. Often, it must be the last thread to finish execution because it performs various shutdown actions.
+
+### 12.3.2 Controlling Main thread
+To control it we must obtain a reference to it. This can be done by calling the method **currentThread()** which is present in Thread class. This method returns a reference to the thread on which it is called. The default priority of Main thread is 5 and for all remaining user threads priority will be inherited from parent to child.
+```java
+// Java program to control the Main Thread
+public class Test extends Thread
+{
+    public static void main(String[] args)
+    {
+        // getting reference to Main thread
+        Thread t = Thread.currentThread();
+         
+        // getting name of Main thread
+        System.out.println("Current thread: " + t.getName());
+         
+        // changing the name of Main thread
+        t.setName("Geeks");
+        System.out.println("After name change: " + t.getName());
+         
+        // getting priority of Main thread
+        System.out.println("Main thread priority: "+ t.getPriority());
+         
+        // setting priority of Main thread to MAX(10)
+        t.setPriority(MAX_PRIORITY);
+         
+        System.out.println("Main thread new priority: "+ t.getPriority());
+         
+         
+        for (int i = 0; i < 5; i++)
+        {
+            System.out.println("Main thread");
+        }
+         
+        // Main thread creating a child thread
+        ChildThread ct = new ChildThread();
+         
+        // getting priority of child thread
+        // which will be inherited from Main thread
+        // as it is created by Main thread
+        System.out.println("Child thread priority: "+ ct.getPriority());
+         
+        // setting priority of Main thread to MIN(1)
+        ct.setPriority(MIN_PRIORITY);
+         
+        System.out.println("Child thread new priority: "+ ct.getPriority());
+         
+        // starting child thread
+        ct.start();
+    }
+}
+ 
+// Child Thread class
+class ChildThread extends Thread
+{
+    @Override
+    public void run() 
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            System.out.println("Child thread");
+        }
+    }
+}
+/*
+Current thread: main
+After name change: Geeks
+Main thread priority: 5
+Main thread new priority: 10
+Main thread
+Main thread
+Main thread
+Main thread
+Main thread
+Child thread priority: 10
+Child thread new priority: 1
+Child thread
+Child thread
+Child thread
+Child thread
+Child thread
+*/
+```
+
+### 12.3.3 Main Thread and Main Function
+For each program, a Main thread is created by JVM(Java Virtual Machine). The “Main” thread first verifies the existence of the main() method, and then it initializes the class. Note that from JDK 6, main() method is mandatory in a standalone java application.
+
+
+## 12.4 Volatile vs Synchronized
+### 12.4.1 Synchronized
+Multi-threaded programs may often come to a situation where multiple threads try to **access the same resources** and finally produce erroneous and unforeseen results.
+
+So it needs to be made sure by some synchronization method that **only one thread can access the resource at a time**.
+
+Java provides a way of creating threads and synchronizing their task by using **synchronized blocks**. Synchronized blocks in Java are marked with the synchronized keyword. A synchronized block in Java is **synchronized on some object (either a method (still object) / an object / part of a method (still object))**. All synchronized blocks synchronized on the same object can only have one thread executing inside them at a time. All other threads attempting to enter the synchronized block are blocked until the thread inside the synchronized block exits the block.
+
+```java
+import java.io.*;
+import java.util.*;
+ 
+// A Class used to send a message
+class Sender
+{
+    public void send(String msg)
+    {
+        System.out.println("Sending\t"  + msg );
+        try
+        {
+            Thread.sleep(1000);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Thread  interrupted.");
+        }
+        System.out.println("\n" + msg + "Sent");
+    }
+}
+ 
+// Class for send a message using Threads
+class ThreadedSend extends Thread
+{
+    private String msg;
+    private Thread t;
+    Sender  sender;
+ 
+    // Recieves a message object and a string
+    // message to be sent
+    ThreadedSend(String m,  Sender obj)
+    {
+        msg = m;
+        sender = obj;
+    }
+ 
+    public void run()
+    {
+        // Only one thread can send a message
+        // at a time.
+        synchronized(sender)
+        {
+            // synchronizing the snd object
+            sender.send(msg);
+        }
+    }
+}
+// Driver class
+class SyncDemo
+{
+    public static void main(String args[])
+    {
+        Sender snd = new Sender();
+        ThreadedSend S1 =
+            new ThreadedSend( " Hi " , snd );
+        ThreadedSend S2 =
+            new ThreadedSend( " Bye " , snd );
+ 
+        // Start two threads of ThreadedSend type
+        S1.start();
+        S2.start();
+ 
+        // wait for threads to end
+        try
+        {
+            S1.join();
+            S2.join();
+        }
+        catch(Exception e)
+        {
+            System.out.println("Interrupted");
+        }
+    }
+}
+```
+The output is same every-time we run the program.
+
+In the above example, we chose to synchronize the Sender object inside the run() method of the ThreadedSend class. Alternately, we could define the **whole send() method as synchronized** and it would produce the same result. Then we don’t have to synchronize the Message object inside the run() method in ThreadedSend class.
+```java
+// An alternate implementation to demonstrate
+// that we can use synchronized with method also.
+class Sender 
+{
+    public synchronized void send(String msg)
+    {
+        System.out.println("Sending\t" + msg );
+        try
+        {
+            Thread.sleep(1000);
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("Thread interrupted.");
+        }
+        System.out.println("\n" + msg + "Sent");
+    }
+}
+```
+
+We do not always have to synchronize a whole method. Sometimes it is preferable to synchronize only **part of a method**.
+```java
+// One more alternate implementation to demonstrate
+// that synchronized can be used with only a part of 
+// method
+class Sender 
+{
+    public void send(String msg)
+    {
+        synchronized(this)
+        {
+            System.out.println("Sending\t" + msg );
+            try
+            {
+                Thread.sleep(1000);
+            } 
+            catch (Exception e) 
+            {
+                System.out.println("Thread interrupted.");
+            }
+            System.out.println("\n" + msg + "Sent");
+        }
+    }
+}
+```
+
+### 12.4.2 Volatile Keyword
+[Reference](https://www.geeksforgeeks.org/volatile-keyword-in-java/)
+
+Using volatile is yet another way (like synchronized, atomic wrapper) of making class thread safe.
+
+Suppose that two threads are working on SharedObj. If two threads run on different processors each thread may have its own local copy of sharedVariable. If one thread modifies its value the change might not reflect in the original one in the main memory instantly. This depends on the write policy of cache. Now the other thread is not aware of the modified value which leads to data inconsistency. Using volatile keyword here makes sure that the changes made in one thread are immediately reflect in other thread.
+
+```java
+class SharedObj
+{
+   // volatile keyword here makes sure that
+   // the changes made in one thread are 
+   // immediately reflect in other thread
+   static volatile int sharedVar = 6;
+}
+```
+
+### 12.4.3 Volatile vs Synchronized
+Before we move on let’s take a look at two important features of locks and synchronization.
+1. Mutual Exclusion: It means that only one thread or process can execute a block of code (critical section) at a time.
+2. Visibility: It means that changes made by one thread to shared data are visible to other threads.
+
+Java’s synchronized keyword guarantees both mutual exclusion and visibility. If we make the blocks of threads that modifies the value of shared variable synchronized only one thread can enter the block and changes made by it will be reflected in the main memory.
+
+In some cases we may only desire the visibility and not atomicity. Use of synchronized in such situation is an overkill and may cause scalability problems. Here volatile comes to the rescue. Volatile variables have the visibility features of synchronized but not the atomicity features. The values of volatile variable will never be cached and all writes and reads will be done to and from the main memory. However, **use of volatile is limited to very restricted set of cases as most of the times atomicity is desired**. For example a simple increment statement such as x = x + 1; or x++ seems to be a single operation but is s really a compound read-modify-write sequence of operations that must execute atomically.
+
+## 12.5 Thread Related Methods
+### 12.5.1 Single-Thread Methods
+[Reference1](https://www.geeksforgeeks.org/java-concurrency-yield-sleep-and-join-methods/) and [Reference2](https://infinitescript.com/2014/09/difference-between-wait-and-sleep-yield-in-java/)
+
+We can prevent the execution of a thread by using one of the following methods of Thread class.
+
+#### 12.5.1.1 yield
+yield() method **pauses the currently executing thread temporarily** for giving a chance to the remaining waiting threads of the same priority to execute. If there is no waiting thread or all the waiting threads have a lower priority then the same thread will continue its execution. The yielded thread when it will get the chance for execution is decided by the thread scheduler whose behavior is vendor dependent. 
+
+Use of yield:
+Whenever a thread calls java.lang.Thread.yield method, it gives hint to the thread scheduler that it is ready to pause its execution.
+```java
+// Control passes to child thread
+Thread.yield();
+```
+
+#### 12.5.1.2 sleep
+sleep(): This method causes the currently executing thread to **sleep for the specified number of milliseconds**. Sleep() causes the thread to definitely stop executing for a given amount of time; if no other thread or process needs to be run, the CPU will be idle
+
+```java
+Thread.sleep(1000);
+```
+
+#### 12.5.1.3 yield vs sleep
+* yield indicates that the thread is not doing anything particularly important and if any other threads or processes need to be run, they can. Otherwise, the current thread **will continue to run.**
+* causes the thread to definitely stop executing for a given amount of time; if no other thread or process needs to be run, the CPU **will be idle**
+
+#### 12.5.1.4 join
+The join() method waits for a thread to die. In other words, it causes the currently running threads to stop executing until the thread it joins with completes its task. For example:
+```java
+t1.start(); 
+t1.join();
+//The main thread will wait stop executing and wait for t1 to finish.
+```
+
+* If any executing thread t1 calls join() on t2 i.e; t2.join() immediately t1 will enter into waiting state until t2 completes its execution. 
+* Giving a timeout within join(), will make the join() effect to be nullified after the specific timeout.
+
+### 12.5.2 Inter-thread Methods
+#### 12.5.2.1 Polling
+The process of testing a condition repeatedly till it becomes true is known as polling. For example, in a classic queuing problem where one thread is producing data and other is consuming it.
+
+#### 12.5.2.2 Polling in Multithreading  
+To avoid polling, Java uses three methods, namely, **wait(), notify() and notifyAll()**.
+All these methods belong to object class as final so that all classes have them. They must be used within a **synchronized block** only. When these functions called, the lock is released.
+
+* wait()-It tells the calling thread to **give up the lock** and go to sleep until some other thread enters the same monitor and calls notify().
+* notify()-It **wakes up one single thread that called wait()** on the same object. It should be noted that calling notify() does not actually give up a lock on a resource.
+* notifyAll()-It wakes up **all the threads that called wait()** on the same object.
+
+```java
+import java.util.Scanner;
+public class threadexample
+{
+    public static void main(String[] args)
+                           throws InterruptedException
+    {
+        final PC pc = new PC();
+ 
+        // Create a thread object that calls pc.produce()
+        Thread t1 = new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    pc.produce();
+                }
+                catch(InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
+ 
+        // Create another thread object that calls
+        // pc.consume()
+        Thread t2 = new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    pc.consume();
+                }
+                catch(InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
+ 
+        // Start both threads
+        t1.start();
+        t2.start();
+ 
+        // t1 finishes before t2
+        t1.join();
+        t2.join();
+    }
+ 
+    // PC (Produce Consumer) class with produce() and
+    // consume() methods.
+    public static class PC
+    {
+        // Prints a string and waits for consume()
+        public void produce()throws InterruptedException
+        {
+            // synchronized block ensures only one thread
+            // running at a time.
+            synchronized(this)
+            {
+                System.out.println("producer thread running");
+ 
+                // releases the lock on shared resource
+                wait();
+ 
+                // and waits till some other method invokes notify().
+                System.out.println("Resumed");
+            }
+        }
+ 
+        // Sleeps for some time and waits for a key press. After key
+        // is pressed, it notifies produce().
+        public void consume()throws InterruptedException
+        {
+            // this makes the produce thread to run first.
+            Thread.sleep(1000);
+            Scanner s = new Scanner(System.in);
+ 
+            // synchronized block ensures only one thread
+            // running at a time.
+            synchronized(this)
+            {
+                System.out.println("Waiting for return key.");
+                s.nextLine();
+                System.out.println("Return key pressed");
+ 
+                // notifies the produce thread that it
+                // can wake up.
+                notify();
+ 
+                // Sleep
+                Thread.sleep(2000);
+            }
+        }
+    }
+}
+/*
+producer thread running
+Waiting for return key.
+Return key pressed
+Resumed
+*/
+```
+Here is how it works:
+* First of all, use of synchronized block ensures that only one thread at a time runs. Also since there is a sleep method just at the beginning of consume loop, the produce thread gets a kickstart.
+* When the wait is called in produce method, it does two things. Firstly it releases the lock it holds on PC object. Secondly it makes the produce thread to go on a waiting state until all other threads have terminated, that is it can again acquire a lock on PC object and some other method wakes it up by invoking notify or notifyAll on the same object.
+* Therefore we see that as soon as wait is called, the control transfers to consume thread and it prints -“Waiting for return key”.
+* After we press the return key, consume method invokes notify(). It also does 2 things- Firstly, unlike wait(), it does not releases the lock on shared resource therefore for getting the desired result, it is advised to use notify only at the end of your method. Secondly, it notifies the waiting threads that now they can wake up but only after the current method terminates.
+* As you might have observed that even after notifying, the control does not immediately passes over to the produce thread. The reason for it being that we have called Thread.sleep() after notify(). As we already know that the consume thread is holding a lock on PC object, another thread cannot access it until it has released the lock. Hence only after the consume thread finishes its sleep time and thereafter terminates by itself, the produce thread cannot take back the control.
+* After a 2 second pause, the program terminates to its completion.
+
+
+## 12.6 ReentrantLock
+The ReentrantLock class implements the Lock interface and provides synchronization to methods while accessing shared resources. The code which manipulates the shared resource is surrounded by calls to **lock and unlock method**. This gives a lock to the current working thread and blocks all other threads which are trying to take a lock on the shared resource. 
+
+As the name says, **ReentrantLock allow threads to enter into lock on a resource more than once**. When the thread first enters into lock, a hold count is set to one. Before unlocking the thread can re-enter into lock again and every time hold count is incremented by one. For every unlock request, hold count is decremented by one and when hold count is 0, the resource is unlocked.
+
+Reentrant Locks also offer a fairness parameter, by which the lock would abide by the order of the lock request i.e. after a thread unlocks the resource, the lock would go to the thread which has been waiting for the longest time. This fairness mode is set up by passing true to the constructor of the lock.
+
+ReentrantLock Methods:
+* lock(): Call to the lock() method increments the hold count by 1 and gives the lock to the thread if the shared resource is initially free.
+* unlock(): Call to the unlock() method decrements the hold count by 1. When this count reaches zero, the resource is released.
+* tryLock(): If the resource is not held by any other thread, then call to tryLock() returns true and the hold count is incremented by one. If the resource is not free then the method returns false and the thread is not blocked but it exits.
+* tryLock(long timeout, TimeUnit unit): As per the method, the thread waits for a certain time period as defined by arguments of the method to acquire the lock on the resource before exiting.
+* lockInterruptibly(): This method acquires the lock if the resource is free while allowing for the thread to be interrupted by some other thread while acquiring the resource. It means that if the current thread is waiting for lock but some other thread requests the lock, then the current thread will be interrupted and return immediately without acquiring lock.
+* getHoldCount(): This method returns the count of the number of locks held on the resource.
+* isHeldByCurrentThread(): This method returns true if the lock on the resource is held by the current thread.
+
+Example:
+1. Create an object of ReentrantLock
+2. Create a worker(Runnable Object) to execute and pass the lock to the object
+3. Use the lock() method to acquire the lock on shared resource
+4. After completing work, call unlock() method to release the lock 
+
+```java
+// Java code to illustrate Reentrant Locks
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.locks.ReentrantLock;
+ 
+class worker implements Runnable
+{
+  String name;
+  ReentrantLock re;
+  public worker(ReentrantLock rl, String n)
+  {
+    re = rl;
+    name = n;
+  }
+  public void run()
+  {
+    boolean done = false;
+    while (!done)
+    {
+      //Getting Outer Lock
+      boolean ans = re.tryLock();
+ 
+      // Returns True if lock is free
+      if(ans)
+      {
+        try
+        {
+          Date d = new Date();
+          SimpleDateFormat ft = new SimpleDateFormat("hh:mm:ss");
+          System.out.println("task name - "+ name
+                     + " outer lock acquired at "
+                     + ft.format(d)
+                     + " Doing outer work");
+          Thread.sleep(1500);
+ 
+          // Getting Inner Lock
+          re.lock();
+          try
+          {
+            d = new Date();
+            ft = new SimpleDateFormat("hh:mm:ss");
+            System.out.println("task name - "+ name
+                       + " inner lock acquired at "
+                       + ft.format(d)
+                       + " Doing inner work");
+            System.out.println("Lock Hold Count - "+ re.getHoldCount());
+            Thread.sleep(1500);
+          }
+          catch(InterruptedException e)
+          {
+            e.printStackTrace();
+          }
+          finally
+          {
+            //Inner lock release
+            System.out.println("task name - " + name +
+                       " releasing inner lock");
+ 
+            re.unlock();
+          }
+          System.out.println("Lock Hold Count - " + re.getHoldCount());
+          System.out.println("task name - " + name + " work done");
+ 
+          done = true;
+        }
+        catch(InterruptedException e)
+        {
+          e.printStackTrace();
+        }
+        finally
+        {
+          //Outer lock release
+          System.out.println("task name - " + name +
+                     " releasing outer lock");
+ 
+          re.unlock();
+          System.out.println("Lock Hold Count - " +
+                       re.getHoldCount());
+        }
+      }
+      else
+      {
+        System.out.println("task name - " + name +
+                      " waiting for lock");
+        try
+        {
+          Thread.sleep(1000);
+        }
+        catch(InterruptedException e)
+        {
+          e.printStackTrace();
+        }
+      }
+    }
+  }
+}
+ 
+public class test
+{
+  static final int MAX_T = 2;
+  public static void main(String[] args)
+  {
+    ReentrantLock rel = new ReentrantLock();
+    ExecutorService pool = Executors.newFixedThreadPool(MAX_T);
+    Runnable w1 = new worker(rel, "Job1");
+    Runnable w2 = new worker(rel, "Job2");
+    Runnable w3 = new worker(rel, "Job3");
+    Runnable w4 = new worker(rel, "Job4");
+    pool.execute(w1);
+    pool.execute(w2);
+    pool.execute(w3);
+    pool.execute(w4);
+    pool.shutdown();
+  }
+}
+
+/*
+Output:
+task name - Job2 waiting for lock
+task name - Job1 outer lock acquired at 09:49:42 Doing outer work
+task name - Job2 waiting for lock
+task name - Job1 inner lock acquired at 09:49:44 Doing inner work
+Lock Hold Count - 2
+task name - Job2 waiting for lock
+task name - Job2 waiting for lock
+task name - Job1 releasing inner lock
+Lock Hold Count - 1
+task name - Job1 work done
+task name - Job1 releasing outer lock
+Lock Hold Count - 0
+task name - Job3 outer lock acquired at 09:49:45 Doing outer work
+task name - Job2 waiting for lock
+task name - Job3 inner lock acquired at 09:49:47 Doing inner work
+Lock Hold Count - 2
+task name - Job2 waiting for lock
+task name - Job2 waiting for lock
+task name - Job3 releasing inner lock
+Lock Hold Count - 1
+task name - Job3 work done
+task name - Job3 releasing outer lock
+Lock Hold Count - 0
+task name - Job4 outer lock acquired at 09:49:48 Doing outer work
+task name - Job2 waiting for lock
+task name - Job4 inner lock acquired at 09:49:50 Doing inner work
+Lock Hold Count - 2
+task name - Job2 waiting for lock
+task name - Job2 waiting for lock
+task name - Job4 releasing inner lock
+Lock Hold Count - 1
+task name - Job4 work done
+task name - Job4 releasing outer lock
+Lock Hold Count - 0
+task name - Job2 outer lock acquired at 09:49:52 Doing outer work
+task name - Job2 inner lock acquired at 09:49:53 Doing inner work
+Lock Hold Count - 2
+task name - Job2 releasing inner lock
+Lock Hold Count - 1
+task name - Job2 work done
+task name - Job2 releasing outer lock
+Lock Hold Count - 0
+*/
+```
+
+## 12.7 Daemon thread 
+Daemon thread is a low priority thread that runs in background to perform tasks such as garbage collection.
+* They can not prevent the JVM from exiting when all the user threads finish their execution.
+* JVM terminates itself when all user threads finish their execution
+* If JVM finds running daemon thread, it terminates the thread and after that shutdown itself. * JVM does not care whether Daemon thread is running or not.
+* It is an utmost low priority thread.
+
+## 12.8 Advanced Multithreading
+Semaphore,CyclicBarrier,CountDownLatch,ReadWriteLock,BlockingQueue
