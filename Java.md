@@ -117,6 +117,30 @@
   * [12.6 ReentrantLock](#126-reentrantlock)
   * [12.7 Daemon thread](#127-daemon-thread)
   * [12.8 Advanced Multithreading](#128-advanced-multithreading)
+- [13. Collections](#13-collections)
+  * [13.1 Iterators](#131-iterators)
+    + [13.1.1 Enumeration](#1311-enumeration)
+    + [13.1.2 Iterator](#1312-iterator)
+    + [13.1.3 ListIterator](#1313-listiterator)
+    + [13.1.4 Notice](#1314-notice)
+  * [13.2 Collections](#132-collections)
+  * [13.3 Use Iterator](#133-use-iterator)
+  * [13.4 Iterator vs Foreach](#134-iterator-vs-foreach)
+    + [13.4.1 Difference:](#1341-difference-)
+    + [13.4.2 When to Use Which:](#1342-when-to-use-which-)
+    + [13.4.3 Performance](#1343-performance)
+  * [13.5 Retrieving Elements from Collections](#135-retrieving-elements-from-collections)
+    + [13.5.1 For-each](#1351-for-each)
+    + [13.5.2 Using Cursors](#1352-using-cursors)
+  * [13.6 Set Interface](#136-set-interface)
+  * [13.7 List Interface](#137-list-interface)
+  * [13.8 HashSet](#138-hashset)
+  * [13.9 LinkedList](#139-linkedlist)
+  * [13.10 ArrayList](#1310-arraylist)
+  * [13.11 ArrayList vs LinkedList in Java](#1311-arraylist-vs-linkedlist-in-java)
+  * [13.12 Map Interface](#1312-map-interface)
+  * [13.13 HashMap](#1313-hashmap)
+  * [13.14 More](#1314-more)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -1982,8 +2006,522 @@ Daemon thread is a low priority thread that runs in background to perform tasks 
 ## 12.8 Advanced Multithreading
 Semaphore,CyclicBarrier,CountDownLatch,ReadWriteLock,BlockingQueue
 
-## TODO
-SQL + List/Set/Map
+
+# 13. Collections
+[Reference](https://www.geeksforgeeks.org/java-collection-tutorial/)
+
+## 13.1 Iterators
+Iterators are used in Collection framework in Java to retrieve elements one by one. There are three iterators.
+### 13.1.1 Enumeration
+Enumeration is a interface used to get elements of legacy collections(Vector, Hashtable).
+```java
+// Here "v" is an Vector class object. e is of
+// type Enumeration interface and refers to "v"
+Enumeration e = v.elements();
+```
+
+There are two methods in Enumeration interface namely:
+```java
+// Tests if this enumeration contains more elements
+public boolean hasMoreElements();
+
+// Returns the next element of this enumeration 
+// It throws NoSuchElementException
+// if no more element present
+public Object nextElement();
+```
+
+**Limitations**:
+* for **legacy classes(Vector, Hashtable) only**
+* Remove operations can’t be performed
+* Only forward direction iterating
+
+### 13.1.2 Iterator
+It is a **universal iterator** as we can apply it to any Collection object. By using Iterator, we can perform both read and remove operations. It is improved version of Enumeration with additional functionality of remove-ability of a element.
+
+Iterator must be used whenever we want to enumerate elements in all Collection framework implemented interfaces like Set, List, Queue, Deque and also in all implemented classes of Map interface. Iterator is the **only** cursor available for entire collection framework.
+
+Iterator object can be created by calling iterator() method present in Collection interface.
+```java
+// Here "c" is any Collection object. itr is of
+// type Iterator interface and refers to "c"
+Iterator itr = c.iterator();
+```
+
+Iterator interface defines three methods:
+```java
+// Returns true if the iteration has more elements
+public boolean hasNext();
+
+// Pop the next one
+public Object next();
+
+// Remove the just poped one, can only be called once per next() call.
+public void remove();
+```
+
+**Limitations**:
+* Only forward direction
+* No replacement and adding elements
+
+### 13.1.3 ListIterator
+It is **only applicable for List collection** implemented classes like arraylist, linkedlist etc. It provides bi-directional iteration.
+
+ListIterator must be used when we want to enumerate elements of List. This cursor has more functionality(methods) than iterator.
+
+ListIterator object can be created by calling listIterator() method present in List interface.
+```java
+// Here "l" is any List object, ltr is of type
+// ListIterator interface and refers to "l"
+ListIterator ltr = l.listIterator();
+```
+
+ListIterator interface extends Iterator interface. So all three methods of Iterator interface are available for ListIterator. In addition there are six more methods.
+```java
+// Forward direction
+
+// Returns true if the iteration has more elements
+public boolean hasNext();
+
+// same as next() method of Iterator
+public Object next();
+
+// Returns the next element index 
+// or list size if the list iterator
+// is at the end of the list
+public int nextIndex();
+
+// Backward direction
+
+// Returns true if the iteration has more elements
+// while traversing backward
+public boolean hasPrevious();
+
+// Returns the previous element in the iteration
+// and can throws NoSuchElementException
+// if no more element present
+public Object previous();
+
+// Returns the previous element index 
+//  or -1 if the list iterator is at the 
+// beginning of the list
+public int previousIndex();
+
+// Other Methods
+ 
+// same as remove() method of Iterator
+public void remove();
+
+// Replaces the last element returned by 
+// next() or previous() with the specified element 
+public void set(Object obj);
+
+// Inserts the specified element into the list at
+// position before the element that would be returned 
+// by next(),
+public void add(Object obj);
+```
+
+Limitations of ListIterator:
+* Powerful, but only for lists. Using ListItarator, we can get iterator’s current position. Since ListIterator can access elements in both directions and supports additional operators, ListIterator cannot be applied on Set (e.g., HashSet and TreeSet)
+
+### 13.1.4 Notice
+* Initially any iterator reference will point to **the index just before the index of first element** in a collection.
+* We **don’t create objects of Enumeration, Iterator, ListIterator** because they are interfaces. We use methods like elements(), iterator(), listIterator() to create objects. These methods have **anonymous Inner classes** that extends respective interfaces and return this class object. 
+
+## 13.2 Collections
+The **Collection interface** (java.util.Collection) and **Map interface** (java.util.Map) are two main root interfaces of Java collection classes.
+
+## 13.3 Use Iterator
+```java
+// Java code to illustrate the use of iterator
+class Test {
+    public static void main(String[] args)
+    {
+        ArrayList<String> list = new ArrayList<String>();
+ 
+        list.add("A");
+        list.add("B");
+        list.add("C");
+        list.add("D");
+        list.add("E");
+ 
+        // Iterator to traverse the list
+        Iterator iterator = list.iterator();
+ 
+        System.out.println("List elements : ");
+ 
+        while (iterator.hasNext())
+            System.out.print(iterator.next() + " ");
+ 
+        System.out.println();
+    }
+}
+
+// ListIterator
+class Test {
+    public static void main(String[] args)
+    {
+        ArrayList<String> list = new ArrayList<String>();
+ 
+        list.add("A");
+        list.add("B");
+        list.add("C");
+        list.add("D");
+        list.add("E");
+ 
+        // ListIterator to traverse the list
+        ListIterator iterator = list.listIterator();
+ 
+        // Traversing the list in forward direction
+        System.out.println("Displaying list elements in forward direction : ");
+ 
+        while (iterator.hasNext())
+            System.out.print(iterator.next() + " ");
+ 
+        System.out.println();
+ 
+        // Traversing the list in backward direction
+        System.out.println("Displaying list elements in backward direction : ");
+ 
+        while (iterator.hasPrevious())
+            System.out.print(iterator.previous() + " ");
+ 
+        System.out.println();
+    }
+}
+```
+
+## 13.4 Iterator vs Foreach
+* Iterator:
+```java
+// Iterating over collection 'c' using terator
+   for (Iterator i = c.iterator(); i.hasNext(); ) 
+       System.out.println(i.next());
+```
+
+* For each loop:
+```java
+// Iterating over collection 'c' using for-each 
+   for (Element e: c)
+       System.out.println(e);
+```
+
+### 13.4.1 Difference:
+* In for-each loop, we can’t modify collection it will throw a ConcurrentModificationException on the other hand with iterator we can modify collection.
+
+### 13.4.2 When to Use Which:
+* If we have to modify collection, we can use Iterator.
+* While using nested for loops it is better to use for-each loop
+
+### 13.4.3 Performance
+Traversing a collection using for-each loops or iterators give the same performance.Here, by performance we mean the time complexity of both these traversals.
+
+If you iterate using the old styled C for loop then we might increase the time complexity drastically.
+
+```java
+for (i=0;i<n;i++)
+   System.out.println(l.get(i));
+```
+
+Here if the list l is an ArrayList then we can access it in O(1) time since it is allocated contiguous memory blocks (just like an array) i.e random access is possible. But if the collection is LinkedList, then random access is not possible since it is not allocated contiguous memory blocks, so in order to access a element we will have to traverse the link list till you get to the required index, thus the time taken in worst case to access an element will be O(n).
+
+**Iterator and for-each loop are faster than simple for loop for collections with no random access, while in collections which allows random access there is no performance change with for-each loop/for loop/iterator.**
+
+## 13.5 Retrieving Elements from Collections
+There are the 2 ways to retrieve any elements from a collection object
+### 13.5.1 For-each
+For each loop is meant for traversing items in a collection.
+```java
+// Iterating over collection 'c' using for-each 
+   for (Element e: c)
+       System.out.println(e);
+```
+
+### 13.5.2 Using Cursors
+Cursor is an interface and it is used to retrieve data from collection object,one by one. Cursor has 3 types:
+* Iterator Interface: Iterator is an interface provided by collection framework to traverse a collection and for a sequential access of items in the collection.
+* ListIterator Interface: It is an interface that contains methods to retrieve the elements from a collection object, both in forward and reverse directions. This iterator is for list based collections.
+* EnumerationIterator Interface: The interface is useful to retrieve one by one the element. This iterator is based on data from Enumeration and has methods
+
+## 13.6 Set Interface
+Java Set is a part of java.util package and extends **java.util.Collection interface**. It does not allow the use of duplicate elements and at max can accommodate only one null element. Few important features of Java Set interface are as follows:
+* The set interface is an unordered collection of objects in which duplicate values cannot be stored.
+* The Java Set does not provide control over the position of insertion or deletion of elements.
+* Basically, Set is implemented by HashSet, LinkedHashSet or TreeSet
+* Set has various methods to add, remove clear, size, etc to enhance the usage of this interface
+
+```java
+public class Set_example
+{
+    public static void main(String[] args)
+    {
+        // Set demonstration using HashSet
+        Set<String> hash_Set = new HashSet<String>();
+        hash_Set.add("Geeks");
+        hash_Set.add("For");
+        hash_Set.add("Geeks");
+        hash_Set.add("Example");
+        hash_Set.add("Set");
+        System.out.print("Set output without the duplicates");
+ 
+        System.out.println(hash_Set);
+ 
+        // Set demonstration using TreeSet
+        System.out.print("Sorted Set after passing into TreeSet");
+        Set<String> tree_Set = new TreeSet<String>(hash_Set);
+        System.out.println(tree_Set);
+    }
+}
+//Set output without the duplicates[Set, Example, Geeks, For]
+//Sorted Set after passing into TreeSet[Example, For, Geeks, Set]
+```
+
+## 13.7 List Interface
+The Java.util.List is a **child interface of Collection**. It is an ordered collection of objects in which duplicate values can be stored. Since List preserves the insertion order, it allows positional access and insertion of elements. List Interface is implemented by **ArrayList, LinkedList**, Vector and Stack classes.
+
+List is an interface, and the instances of List can be created in the following ways:
+```java
+List a = new ArrayList();
+List b = new LinkedList();
+List c = new Vector(); 
+List d = new Stack(); 
+```
+
+Operations on List:
+* **Positional Access**: List allows add, remove, get and set operations based on numerical positions of elements in List.
+* **Search**: List provides methods to search element and returns its numeric position. (indexOf, lastIndexOf)
+* **Iteration**: ListIterator(extends Iterator) is used to iterate over List element. List iterator is bidirectional iterator.
+* **Range-view**: List Interface provides a method to get the List view of the portion of given List between two indices. (subList(int fromIndex,int toIndex))
+
+## 13.8 HashSet
+The HashSet class implements the Set interface, backed by a hash table which is actually a HashMap instance. No guarantee is made as to the iteration order of the set which means that the class does not guarantee the constant order of elements over time. 
+
+Few important features of HashSet are：
+* Implements Set Interface
+* Underlying data structure for HashSet is hashtable
+* As it implements the Set Interface, duplicate values are not allowed
+* Objects that you insert in HashSet are not guaranteed to be inserted in same order
+* HashSet also implements Searlizable and Cloneable interfaces
+
+Now for the maintenance of constant time performance, iterating over HashSet requires time proportional to the sum of the HashSet instance’s size (the number of elements) plus the “capacity” of the backing HashMap instance (the number of buckets). Thus, it’s very important **not to set the initial capacity too high (or the load factor too low) if iteration performance is important**.
+
+Initial Capacity: The initial capacity means the number of buckets when hashtable (HashSet internally uses hashtable data structure) is created. The number of buckets will be automatically increased if the current size gets full.
+
+Load Factor: The load factor is a measure of how full the HashSet is allowed to get before its capacity is automatically increased. When the number of entries in the hash table exceeds the product of the load factor and the current capacity, the hash table is rehashed (that is, internal data structures are rebuilt) so that the hash table has approximately twice the number of buckets.
+
+Effect on performance:
+Load factor and initial capacity are two main factors that affect the performance of HashSet operations. Load factor of 0.75 provides very effective performance as respect to time and space complexity. If we increase the load factor value more than that then memory overhead will be reduced (because it will decrease internal rebuilding operation) but, it will affect the add and search operation in hashtable. To reduce the rehashing operation we should choose initial capacity wisely. If initial capacity is greater than the maximum number of entries divided by the load factor, no rehash operation will ever occur.
+
+NOTE: The implementation in a HashSet is not synchronized, in the sense that if multiple threads access a hash set concurrently, and at least one of the threads modifies the set, it must be synchronized externally. This is typically accomplished by synchronizing on some object that naturally encapsulates the set. If no such object exists, the set should be “wrapped” using the Collections.synchronizedSet method. This is best done at creation time, to prevent accidental unsynchronized access to the set as shown below:
+```java
+Set s = Collections.synchronizedSet(new HashSet(...));
+```
+
+Constructors in HashSet:
+```java
+HashSet h = new HashSet(); 
+//Default initial capacity is 16 and default load factor is 0.75.
+HashSet h = new HashSet(int initialCapacity); 
+//default loadFactor of 0.75
+HashSet h = new HashSet(int initialCapacity, float loadFactor);
+HashSet h = new HashSet(Collection C);
+```
+
+Internal working of a HashSet
+All the classes of Set interface internally backed up by Map. HashSet uses HashMap for storing its object internally. You must be wondering that to enter a value in HashMap we need a key-value pair, but in HashSet we are passing only one value.
+
+Storage in HashMap
+Actually the value we insert in HashSet acts as key to the map Object and for its value java uses a constant variable. So in key-value pair all the keys will have same value.
+
+Implementation of HashSet in java doc:
+```java
+private transient HashMap map;
+
+// Constructor - 1
+// All the constructors are internally creating HashMap Object.
+public HashSet()
+{
+    // Creating internally backing HashMap object
+    map = new HashMap();
+}
+
+// Constructor - 2
+public HashSet(int initialCapacity)
+{
+    // Creating internally backing HashMap object
+    map = new HashMap(initialCapacity);
+}
+
+// Dummy value to associate with an Object in Map
+private static final Object PRESENT = new Object();
+```
+If we look at add() method of HashSet class:
+```java
+public boolean add(E e)
+{
+   return map.put(e, PRESENT) == null;
+}
+```
+We can notice that, add() method of HashSet class internally calls put() method of backing HashMap object by passing the element you have specified as a key and constant “PRESENT” as its value.
+
+remove() method also works in the same manner. It internally calls remove method of Map interface.
+```java
+public boolean remove(Object o)
+{
+  return map.remove(o) == PRESENT;
+}
+```
+Time Complexity of HashSet Operations: The underlying data structure for HashSet is hashtable. So amortize (average or usual case) time complexity for add, remove and look-up (contains method) operation of HashSet takes O(1) time.
+
+Methods in HashSet:
+* boolean add(E e): Used to add the specified element if it is not present, if it is present then return false.
+* void clear(): Used to remove all the elements from set.
+* boolean contains(Object o): Used to return true if an element is present in set.
+* boolean remove(Object o): Used to remove the element if it is present in set.
+* Iterator iterator(): Used to return an iterator over the element in the set.
+* boolean isEmpty(): Used to check whether the set is empty or not. Returns true for empty and false for non-empty condition for set.
+* int size(): Used to return the size of the set.
+* Object clone(): Used to create a shallow copy of the set.
+
+## 13.9 LinkedList
+Linked List are linear data structures where the elements **are not stored in contiguous locations** and every element is a separate object with a data part and address part. The elements are **linked using pointers and addresses**. Each element is known as a node. Due to the dynamicity and **ease of insertions and deletions**, they are preferred over the arrays. It also has few disadvantages like the nodes cannot be accessed directly instead we need to start from the head and follow through the link to reach to a node we wish to access.
+To store the elements in a linked list we use a doubly linked list which provides a linear data structure and also used to inherit an abstract class and implement list and deque interfaces.
+
+In Java, LinkedList class **implements the list interface**. The LinkedList class also consists of various constructors and methods like other java collections. 
+
+Constructors for Java LinkedList:
+* LinkedList(): Used to create an empty linked list.
+* LinkedList(Collection C): Used to create a ordered list which contains all the elements of a specified collection, as returned by the collection’s iterator.
+
+Methods for Java LinkedList:
+* int size(): It returns the number of elements in this list.
+* void clear(): It removes all of the elements from the list.
+* Object clone(): It is used to make the copy of an existing linked list.
+* Object set(int index, Object element): It is used to replace an existing element in the list with a new element.
+* boolean contains(Object element): It returns true if the element is present in the list.
+* boolean add(Object element): It appends the element to the end of the list.
+* void add(int index, Object element): It inserts the element at the position ‘index’ in the list.
+* void addFirst(Object element): It inserts the element at the beginning of the list.
+* Object getFirst(): It returns the first element of the Linked List.
+* int lastIndexOf(Object element): If element is found, it returns the index of the last occurrence of the element. Else, it returns -1.
+* Object remove(int index): It removes the element at the position ‘index’ in this list. It throws ‘NoSuchElementException’ if the list is empty.
+
+## 13.10 ArrayList
+ArrayList is a part of collection framework and is present in java.util package. It provides us dynamic arrays in Java. Though, it may be slower than standard arrays but can be helpful in programs where lots of manipulation in the array is needed.
+* ArrayList inherits AbstractList class and **implements List interface**.
+* ArrayList is initialized by a size, however the size can increase if collection grows or shrunk if objects are removed from the collection.
+* Java ArrayList allows us to randomly access the list.
+* ArrayList can not be used for primitive types, like int, char, etc. We need a wrapper class for such cases.
+* ArrayList in Java can be seen as similar to vector in C++.
+
+Constructors in Java ArrayList:
+
+* ArrayList(): This constructor is used to build an empty array list
+* ArrayList(Collection c): This constructor is used to build an array list initialized with the elements from collection c
+* ArrayList(int capacity): This constructor is used to build an array list with initial capacity being specified
+
+Methods in Java ArrayList:
+
+* void clear(): This method is used to remove all the elements from any list.
+* void add(int index, Object element): This method is used to insert a specific element at a specific position index in a list.
+* int indexOf(Object O): The index the first occurrence of a specific element is either returned, or -1 in case the element is not in the list.
+* Object clone(): This method is used to return a shallow copy of an ArrayList.
+* Object[] toArray(): This method is used to return an array containing all of the elements in the list in correct order.
+* boolean add(Object o): This method is used to append a specificd element to the end of a list.
+* Object remove(int index): removes the element at the specified position in this list.
+
+## 13.11 ArrayList vs LinkedList in Java
+0. ArrayList:-Implemented with the concept of dynamic array / LinkedList:-Implemented with the concept of doubly linked list.
+1. insertions are easy and fast in LinkedList as compared to ArrayList because there is no risk of resizing array and copying content to new array if array gets full which **makes adding into ArrayList of O(n) in worst case, while adding is O(1) operation in LinkedList** in Java. ArrayList also needs to be update its index if you insert something anywhere except at the end of array.
+2. Removal also better in LinkedList than ArrayList due to same reasons as insertion.
+3. LinkedList has more memory overhead than ArrayList because in ArrayList each index only holds actual object (data) but in case of LinkedList each node holds both data and address of next and previous node.
+4. Both LinkedList and ArrayList require O(n) time to find if an element is present or not. However we can do Binary Search on ArrayList if it is sorted and therefore can search in O(Log n) time.
+
+## 13.12 Map Interface
+The java.util.Map interface represents a **mapping between a key and a value**. The Map interface is not a subtype of the Collection interface. Therefore it behaves a bit different from the rest of the collection types. 
+
+Few characteristics of the Map Interface are:
+
+* A Map cannot contain duplicate keys and each key can map to at most one value. Some implementations allow null key and null value like the HashMap and LinkedHashMap, but some do not like the TreeMap.
+* The order of a map depends on specific implementations, e.g TreeMap and LinkedHashMap have predictable order, while HashMap does not.
+* There are two interfaces for implementing Map in java: Map and SortedMap, and three classes: HashMap, TreeMap and LinkedHashMap.
+
+Why and When to use Maps?
+
+Maps are perfect to use for key-value association mapping such as dictionaries. The maps are used to perform lookups by keys or when someone wants to retrieve and update elements by keys. Some examples are:
+
+* A map of error codes and their descriptions.
+* A map of zip codes and cities.
+* A map of managers and employees. Each manager (key) is associated with a list of employees (value) he manages.
+* A map of classes and students. Each class (key) is associated with a list of students (value).
+
+Methods in Map Interface:
+
+* public Object put(Object key, Object value): This method is used to insert an entry in this map.
+* public Object remove(Object key): This method is used to delete an entry for the specified key.
+* public Object get(Object key):This method is used to return the value for the specified key.
+* public boolean containsKey(Object key): This method is used to search the specified key from this map.
+* public Set keySet(): This method is used to return the Set view containing all the keys.
+* public Set entrySet(): This method is used to return the Set view containing all the keys and values.
+
+## 13.13 HashMap
+HashMap is a part of Java’s collection since Java 1.2. It provides the basic implementation of Map interface of Java. It stores the data in (Key, Value) pairs. To access a value one must know its key. HashMap is known as HashMap because it uses a technique called Hashing. Hashing is a technique of converting a large String to small String that represents same String. A shorter value helps in indexing and faster searches. HashSet also uses HashMap internally. It internally uses a link list to store key-value pairs already explained in HashSet in detail and further articles.
+
+Few important features of HashMap are:
+* HashMap is a part of java.util package.
+* HashMap extends an abstract class AbstractMap. AbstractMap provides an incomplete implementation of Map interface.
+* It also **implements Cloneable and Serializable interface**. K and V in the above definition represent Key and Value respectively.
+* HashMap doesn’t allow duplicate keys but allows duplicate values. That means A single key can’t contain more than 1 value but more than 1 key can contain a single value.
+* HashMap allows null key also but only once and multiple null values.
+* This class makes no guarantees as to the order of the map; in particular, it does not guarantee that the order will remain constant over time. It is roughly similar to HashTable but is unsynchronized.
+
+Internal Structure of HashMap:
+
+Internally HashMap contains an array of Node and a node is represented as a class which contains 4 fields:
+* int hash
+* K key
+* V value
+* Node next
+
+Performance of HashMap depends on 2 parameters:
+* Initial Capacity: As already said, Capacity is simply the number of buckets whereas the Initial Capacity is the capacity of HashMap instance when it is created. The Load Factor is a measure that when rehashing should be done. Rehashing is a process of increasing the capacity. In HashMap capacity is multiplied by 
+* Load Factor: Load Factor is also a measure that what fraction of the HashMap is allowed to fill before rehashing. When the number of entries in HashMap increases the product of current capacity and load factor the capacity is increased that is rehashing is done. If the initial capacity is kept higher then rehashing will never be done. But by keeping it higher it increases the time complexity of iteration. So it should be choosed very cleverly to increase the performance. The expected number of values should be taken into account to set initial capacity. Most generally preffered load factor value is 0.75 which provides a good deal between time and space costs. Load factor’s value varies between 0 and 1.
+
+Synchronized HashMap:
+
+As it is told that HashMap is unsynchronized i.e. multiple threads can access it simultaneously. If multiple threads access this class simultaneously and at least one thread manipulates it structurally then it is necessary to make it synchronized externally. It is done by synchronizing some object which enzapsulates the map. If No such object exists then it can be wrapped around Collections.synchronizedMap() to make HashMap synchronized and avoid accidental unsynchronized access. As in following example:
+```java
+Map m = Collections.synchronizedMap(new HashMap(...));
+Now the Map m is synchronized.
+```
+
+Constructors in HashMap
+
+HashMap provides 4 constructors and access modifier of each is public:
+* HashMap() : It is the default constructor which creates an instance of HashMap with initial capacity 16 and load factor 0.75.
+* HashMap(int initial capacity) : It creates a HashMap instance with specified initial capacity and load factor 0.75.
+* HashMap(int initial capacity, float loadFactor) : It creates a HashMap instance with specified initial capacity and specified load factor.
+* HashMap(Map map) : It creates instance of HashMapwith same mappings as specified map.
+
+Time complexity of HashMap:
+
+HashMap provides constant time complexity for basic operations, get and put, if hash function is properly written and it disperses the elements properly among the buckets. Iteration over HashMap depends on the capacity of HashMap and number of key-value pairs. Basically it is directly proportional to the capacity + size. Capacity is the number of buckets in HashMap. So it is not a good idea to keep high number of buckets in HashMap initially.
+
+Methods in HashMap:
+* void clear(): Used to remove all mappings from a map.
+* boolean containsKey(Object key): Used to return True if for a specified key, mapping is present in the map.
+* Object clone(): It is used to return a shallow copy of the mentioned hash map.
+* boolean isEmpty(): Used to check whether the map is empty or not. Returns true if the map is empty.
+* Set keySet(): It is used to return a set view of the keys.
+* int size(): It is used to return the size of a map.
+* Object put(Object key, Object value): It is used to insert a particular mapping of key-value pair into a map.
+* Object remove(Object key): It is used to remove the values for any particular key in the Map.
+
+## 13.14 More
+See [this] (https://www.geeksforgeeks.org/java-collection-tutorial/).
+
+## Example Questions
 #https://www.javatpoint.com/java-collections-interview-questions
 #https://www.baeldung.com/java-collections-interview-questions
 #https://www.journaldev.com/1330/java-collections-interview-questions-and-answers#compable-comparator
