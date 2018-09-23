@@ -1688,7 +1688,7 @@ The process of testing a condition repeatedly till it becomes true is known as p
 To avoid polling, Java uses three methods, namely, **wait(), notify() and notifyAll()**.
 All these methods belong to object class as final so that all classes have them. They must be used within a **synchronized block** only. When these functions called, the lock is released.
 
-* wait()-It tells the calling thread to **give up the lock** and go to sleep until some other thread enters the same monitor and calls notify().
+* wait()-It tells the calling thread to **give up the lock** and go to sleep until some other thread enters the same monitor and calls notify(). The current thread must own this object's monitor. The thread releases ownership of this monitor and waits until another thread notifies threads waiting on this object's monitor to wake up either through a call to the notify method or the notifyAll method. The thread then waits until it can re-obtain ownership of the monitor and resumes execution. [Reference](https://www.tutorialspoint.com/java/lang/object_wait.htm)
 * notify()-It **wakes up one single thread that called wait()** on the same object. It should be noted that calling notify() does not actually give up a lock on a resource.
 * notifyAll()-It wakes up **all the threads that called wait()** on the same object.
 
