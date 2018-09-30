@@ -1,0 +1,1640 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Scala\n",
+    "scalable language"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Basic Data Type\n",
+    "   * Byte\n",
+    "   * Short\n",
+    "   * Int\n",
+    "   * Char\n",
+    "   * Double\n",
+    "   "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[36ma_int\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m3\u001b[39m\n",
+       "\u001b[36ma_char\u001b[39m: \u001b[32mChar\u001b[39m = \u001b[32m'd'\u001b[39m\n",
+       "\u001b[36mb_int\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m87342423\u001b[39m\n",
+       "\u001b[36mb_long\u001b[39m: \u001b[32mLong\u001b[39m = \u001b[32m8734242321312321312L\u001b[39m\n",
+       "\u001b[36mc_float\u001b[39m: \u001b[32mDouble\u001b[39m = \u001b[32m12.3\u001b[39m\n",
+       "\u001b[36mz\u001b[39m: \u001b[32mLong\u001b[39m = \u001b[32m231231312312313123L\u001b[39m"
+      ]
+     },
+     "execution_count": 1,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "var a_int: Int = 3 //Create a variable named a_int with value 3.\n",
+    "var a_char: Char = 'd' //create char\n",
+    "var b_int = 87342423\n",
+    "\n",
+    "//var b_long = 8734242321312321312 // Too large for int\n",
+    "var b_long = 8734242321312321312L //Add \"L\" L to it\n",
+    "var c_float = 12.3\n",
+    "val z = 231231312312313123L"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Collections\n",
+    "    * Seq\n",
+    "        * Vectors\n",
+    "        * Streams\n",
+    "        * Lists\n",
+    "        * Queues\n",
+    "        * Strings\n",
+    "    * Sets\n",
+    "        * Hashset\n",
+    "        * SortedSet\n",
+    "        * Treeset\n",
+    "    * Maps\n",
+    "        * HashMaps\n",
+    "        * SortedMaps\n",
+    "        \n",
+    "### Mutable / Immutable\n",
+    "If immutable, modification will result in a new instance"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[36mtemps\u001b[39m: \u001b[32mArray\u001b[39m[\u001b[32mInt\u001b[39m] = \u001b[33mArray\u001b[39m(\u001b[32m10\u001b[39m, \u001b[32m20\u001b[39m, \u001b[32m30\u001b[39m, \u001b[32m40\u001b[39m, \u001b[32m32\u001b[39m)\n",
+       "\u001b[36mres1_1\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m20\u001b[39m\n",
+       "\u001b[36mres1_2\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m5\u001b[39m\n",
+       "\u001b[36mres1_4\u001b[39m: \u001b[32mArray\u001b[39m[\u001b[32mInt\u001b[39m] = \u001b[33mArray\u001b[39m(\u001b[32m10\u001b[39m, \u001b[32m20\u001b[39m, \u001b[32m30\u001b[39m, \u001b[32m40\u001b[39m, \u001b[32m32\u001b[39m)\n",
+       "\u001b[36mtemp2\u001b[39m: \u001b[32mArray\u001b[39m[\u001b[32mInt\u001b[39m] = \u001b[33mArray\u001b[39m(\u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m)\n",
+       "\u001b[36mtemp3\u001b[39m: \u001b[32mArray\u001b[39m[\u001b[32mArray\u001b[39m[\u001b[32mInt\u001b[39m]] = \u001b[33mArray\u001b[39m(\n",
+       "  \u001b[33mArray\u001b[39m(\u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m),\n",
+       "  \u001b[33mArray\u001b[39m(\u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m),\n",
+       "  \u001b[33mArray\u001b[39m(\u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m),\n",
+       "  \u001b[33mArray\u001b[39m(\u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m),\n",
+       "  \u001b[33mArray\u001b[39m(\u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m),\n",
+       "  \u001b[33mArray\u001b[39m(\u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m),\n",
+       "  \u001b[33mArray\u001b[39m(\u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m),\n",
+       "  \u001b[33mArray\u001b[39m(\u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m),\n",
+       "  \u001b[33mArray\u001b[39m(\u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m),\n",
+       "  \u001b[33mArray\u001b[39m(\u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m)\n",
+       ")\n",
+       "\u001b[32mimport \u001b[39m\u001b[36mArray._ //Import Array Functions such as concat\n",
+       "\u001b[39m\n",
+       "\u001b[36mres1_8\u001b[39m: \u001b[32mArray\u001b[39m[\u001b[32mInt\u001b[39m] = \u001b[33mArray\u001b[39m(\u001b[32m10\u001b[39m, \u001b[32m20\u001b[39m, \u001b[32m30\u001b[39m, \u001b[32m40\u001b[39m, \u001b[32m32\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m, \u001b[32m0\u001b[39m)\n",
+       "\u001b[36ml\u001b[39m: \u001b[32mList\u001b[39m[\u001b[32mAny\u001b[39m] = \u001b[33mList\u001b[39m(1, true, ad)"
+      ]
+     },
+     "execution_count": 2,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "//Arrays are mutable\n",
+    "val temps = Array(10,20,30,40,50) //0 based\n",
+    "temps(1) //Use parenthesis\n",
+    "temps.length\n",
+    "temps(4) = 32 //Update\n",
+    "temps\n",
+    "\n",
+    "val temp2: Array[Int] = new Array[Int](10) //new array of 10 0s.\n",
+    "var temp3 = Array.ofDim[Int](10,10) //10 * 10 matrix\n",
+    "\n",
+    "\n",
+    "import Array._ //Import Array Functions such as concat\n",
+    "concat(temps, temp2)\n",
+    "\n",
+    "//temps. //temp. hit tab, it has auto completion\n",
+    "\n",
+    "//Immutable\n",
+    "var l:List[Any] = List(1,true,\"ad\") //List[Any]\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[36mvec1\u001b[39m: \u001b[32mVector\u001b[39m[\u001b[32mInt\u001b[39m] = \u001b[33mVector\u001b[39m(\u001b[32m1\u001b[39m, \u001b[32m2\u001b[39m, \u001b[32m3\u001b[39m, \u001b[32m4\u001b[39m, \u001b[32m5\u001b[39m)\n",
+       "\u001b[36mres2_1\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m3\u001b[39m\n",
+       "\u001b[36mmyRange\u001b[39m: \u001b[32mRange\u001b[39m.\u001b[32mInclusive\u001b[39m = \u001b[33mRange\u001b[39m(\u001b[32m1\u001b[39m, \u001b[32m2\u001b[39m, \u001b[32m3\u001b[39m, \u001b[32m4\u001b[39m, \u001b[32m5\u001b[39m, \u001b[32m6\u001b[39m, \u001b[32m7\u001b[39m, \u001b[32m8\u001b[39m, \u001b[32m9\u001b[39m, \u001b[32m10\u001b[39m)\n",
+       "\u001b[36mmyRange2\u001b[39m: \u001b[32mRange\u001b[39m = \u001b[33mRange\u001b[39m(\u001b[32m1\u001b[39m, \u001b[32m3\u001b[39m, \u001b[32m5\u001b[39m, \u001b[32m7\u001b[39m, \u001b[32m9\u001b[39m)"
+      ]
+     },
+     "execution_count": 3,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "//Vectors are immutable\n",
+    "val vec1: Vector[Int] = Vector(1,2,3,4,5)\n",
+    "vec1(2)\n",
+    "\n",
+    "//ranges are immutable\n",
+    "val myRange = 1 to 10\n",
+    "val myRange2 : Range = new Range(1,10,2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[36mcountry_captials\u001b[39m: \u001b[32mMap\u001b[39m[\u001b[32mString\u001b[39m, \u001b[32mString\u001b[39m] = \u001b[33mMap\u001b[39m(\u001b[32m\"Argentina\"\u001b[39m -> \u001b[32m\"Buenos Aires\"\u001b[39m, \u001b[32m\"US\"\u001b[39m -> \u001b[32m\"Washington D.C.\"\u001b[39m)\n",
+       "\u001b[36mres3_1\u001b[39m: \u001b[32mIterable\u001b[39m[\u001b[32mString\u001b[39m] = \u001b[33mSet\u001b[39m(\u001b[32m\"Argentina\"\u001b[39m, \u001b[32m\"US\"\u001b[39m)\n",
+       "\u001b[36mres3_2\u001b[39m: \u001b[32mIterable\u001b[39m[\u001b[32mString\u001b[39m] = \u001b[33mMapLike\u001b[39m(\u001b[32m\"Buenos Aires\"\u001b[39m, \u001b[32m\"Washington D.C.\"\u001b[39m)\n",
+       "\u001b[36mres3_3\u001b[39m: \u001b[32mOption\u001b[39m[\u001b[32mString\u001b[39m] = \u001b[33mSome\u001b[39m(\u001b[32m\"Buenos Aires\"\u001b[39m)\n",
+       "\u001b[36mres3_4\u001b[39m: \u001b[32mOption\u001b[39m[\u001b[32mString\u001b[39m] = None\n",
+       "\u001b[36mres3_5\u001b[39m: \u001b[32mString\u001b[39m = \u001b[32m\"Buenos Aires\"\u001b[39m\n",
+       "\u001b[36mres3_6\u001b[39m: \u001b[32mBoolean\u001b[39m = \u001b[32mtrue\u001b[39m\n",
+       "\u001b[36mres3_7\u001b[39m: \u001b[32mBoolean\u001b[39m = \u001b[32mfalse\u001b[39m\n",
+       "\u001b[36mres3_8\u001b[39m: \u001b[32mString\u001b[39m = \u001b[32m\"Not Found\"\u001b[39m\n",
+       "\u001b[36mres3_9\u001b[39m: \u001b[32mMap\u001b[39m[\u001b[32mString\u001b[39m, \u001b[32mString\u001b[39m] = \u001b[33mMap\u001b[39m(\n",
+       "  \u001b[32m\"Argentina\"\u001b[39m -> \u001b[32m\"Buenos Aires\"\u001b[39m,\n",
+       "  \u001b[32m\"US\"\u001b[39m -> \u001b[32m\"Washington D.C.\"\u001b[39m,\n",
+       "  \u001b[32m\"China\"\u001b[39m -> \u001b[32m\"Beijing\"\u001b[39m\n",
+       ")\n",
+       "\u001b[36mres3_10\u001b[39m: \u001b[32mMap\u001b[39m[\u001b[32mString\u001b[39m, \u001b[32mString\u001b[39m] = \u001b[33mMap\u001b[39m(\u001b[32m\"Argentina\"\u001b[39m -> \u001b[32m\"Buenos Aires\"\u001b[39m, \u001b[32m\"US\"\u001b[39m -> \u001b[32m\"Washington D.C.\"\u001b[39m)"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "// Maps\n",
+    "val country_captials = Map(\"Argentina\" -> \"Buenos Aires\", \"US\" -> \"Washington D.C.\")\n",
+    "country_captials.keys //get the keys\n",
+    "country_captials.values // get values\n",
+    "\n",
+    "country_captials.get(\"Argentina\") // get\n",
+    "country_captials.get(\"asd\") //Not their get None\n",
+    "\n",
+    "country_captials(\"Argentina\") // get val\n",
+    "\n",
+    "country_captials.contains(\"Argentina\")//test\n",
+    "country_captials.contains(\"dfs\")\n",
+    "\n",
+    "country_captials.getOrElse(\"China\", \"Not Found\") //return alternative\n",
+    "\n",
+    "country_captials + (\"China\" -> \"Beijing\") //Add to map\n",
+    "\n",
+    "country_captials - (\"China\") //Remove\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Expression"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "10\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[36mres4_0\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m3\u001b[39m\n",
+       "\u001b[36mres4_1\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m1\u001b[39m\n",
+       "\u001b[36mres4_2\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m24\u001b[39m\n",
+       "\u001b[36mres4_3\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m2\u001b[39m\n",
+       "\u001b[36mres4_4\u001b[39m: \u001b[32mBoolean\u001b[39m = \u001b[32mfalse\u001b[39m\n",
+       "\u001b[36mres4_5\u001b[39m: \u001b[32mBoolean\u001b[39m = \u001b[32mfalse\u001b[39m\n",
+       "\u001b[36mres4_6\u001b[39m: \u001b[32mBoolean\u001b[39m = \u001b[32mfalse\u001b[39m\n",
+       "\u001b[36mres4_7\u001b[39m: \u001b[32mBoolean\u001b[39m = \u001b[32mtrue\u001b[39m\n",
+       "\u001b[36mres4_8\u001b[39m: \u001b[32mBoolean\u001b[39m = \u001b[32mtrue\u001b[39m\n",
+       "\u001b[36ma\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m10\u001b[39m\n",
+       "\u001b[36mb\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m20\u001b[39m\n",
+       "\u001b[36mc\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m400\u001b[39m\n",
+       "\u001b[36mres4_13\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m40\u001b[39m"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "\n",
+    "1 + 2\n",
+    "\n",
+    "3 - 2\n",
+    "\n",
+    "4 * 6\n",
+    "\n",
+    "8 / 3\n",
+    "\n",
+    "5 <= 4\n",
+    "\n",
+    "3 > 6\n",
+    "\n",
+    "(3 > 4) && (5 <= 3)\n",
+    "\n",
+    "(3 > 4) || (5 <= 6)\n",
+    "\n",
+    "!(3 > 4)\n",
+    "\n",
+    "var a = 10\n",
+    "\n",
+    "var b = 20\n",
+    "\n",
+    "var c = 30\n",
+    "\n",
+    "c += a\n",
+    "\n",
+    "c\n",
+    "\n",
+    "c *= a\n",
+    "\n",
+    "println(\n",
+    "{\n",
+    "    val a = 2 * 3\n",
+    "    a + 4\n",
+    "})\n",
+    "//print the result of the expressions."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Functions\n",
+    "\n",
+    "function name(parameters): return type = body\n",
+    "\n",
+    "Unit means return void"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "dasf\n",
+      "a b\n",
+      "a b\n",
+      "al li\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "defined \u001b[32mfunction\u001b[39m \u001b[36mmyFunction\u001b[39m\n",
+       "\u001b[36mres5_1\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m6\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36mmyProcedure\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36mfunction\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36mfac\u001b[39m\n",
+       "\u001b[36mres5_6\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m120\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36mfac1\u001b[39m\n",
+       "\u001b[36mres5_8\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m120\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36mfac2\u001b[39m\n",
+       "\u001b[36mres5_10\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m120\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36mprintName\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36mprintName1\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36msum\u001b[39m\n",
+       "\u001b[36mres5_17\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m15\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36msum1\u001b[39m\n",
+       "\u001b[36mres5_19\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m6\u001b[39m"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "def myFunction(a:Int, b:Int) : Int = {\n",
+    "    val c = a * b\n",
+    "    return c\n",
+    "}\n",
+    "myFunction(2,3)\n",
+    "\n",
+    "//Procedure: No output\n",
+    "\n",
+    "def myProcedure(inStr: String) : Unit = {\n",
+    "    \n",
+    "    println(inStr)\n",
+    "    \n",
+    "}\n",
+    "myProcedure(\"dasf\")\n",
+    "\n",
+    "def function(x:Int) ={\n",
+    "    if (x == 0) 1\n",
+    "    else \"negative\"\n",
+    "}\n",
+    "//returning int / string\n",
+    "\n",
+    "def fac(n:Int) = {\n",
+    "    var r = 1\n",
+    "    for (i <- 1 to n)\n",
+    "    {\n",
+    "        r = r * i\n",
+    "    }\n",
+    "    r\n",
+    "}\n",
+    "fac(5)\n",
+    "\n",
+    "def fac1(n:Int) : Int = {\n",
+    "    var r = 1\n",
+    "    for (i <- 1 to n)\n",
+    "    {\n",
+    "        r = r * i\n",
+    "    }\n",
+    "    return r\n",
+    "}\n",
+    "fac1(5)\n",
+    "\n",
+    "def fac2(n:Int):Int = {\n",
+    "    if (n <= 0) 1\n",
+    "    else n * fac(n-1)\n",
+    "}\n",
+    "fac2(5)\n",
+    "\n",
+    "def printName(first:String, last:String) = {\n",
+    "    println(first + \" \" + last)\n",
+    "}\n",
+    "\n",
+    "printName(first = \"a\", last = \"b\")\n",
+    "printName(last = \"b\", first = \"a\")\n",
+    "\n",
+    "\n",
+    "def printName1(first:String = \"al\", last:String = \"li\") = {\n",
+    "    println(first + \" \" + last)\n",
+    "}\n",
+    "printName1()\n",
+    "\n",
+    "def sum(args:Int*) = {\n",
+    "    var result = 0\n",
+    "    for(arg <- args)\n",
+    "    {\n",
+    "        result += arg\n",
+    "    }\n",
+    "    result\n",
+    "}\n",
+    "sum(4,5,6)\n",
+    "\n",
+    "//specify return type if using return\n",
+    "def sum1(args:Int*) : Int = {\n",
+    "    var result = 0\n",
+    "    for(arg <- args)\n",
+    "    {\n",
+    "        result += arg\n",
+    "    }\n",
+    "    return result\n",
+    "}\n",
+    "sum1(2,2,2)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Objects"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[36marr\u001b[39m: \u001b[32mArray\u001b[39m[\u001b[32mInt\u001b[39m] = \u001b[33mArray\u001b[39m(\u001b[32m30\u001b[39m, \u001b[32m20\u001b[39m, \u001b[32m10\u001b[39m, \u001b[32m40\u001b[39m, \u001b[32m50\u001b[39m)\n",
+       "\u001b[36mres6_1\u001b[39m: \u001b[32mArray\u001b[39m[\u001b[32mInt\u001b[39m] = \u001b[33mArray\u001b[39m(\u001b[32m10\u001b[39m, \u001b[32m20\u001b[39m, \u001b[32m30\u001b[39m, \u001b[32m40\u001b[39m, \u001b[32m50\u001b[39m)\n",
+       "defined \u001b[32mclass\u001b[39m \u001b[36mlocation\u001b[39m\n",
+       "\u001b[36mloc1\u001b[39m: \u001b[32mlocation\u001b[39m = $sess.cmd6Wrapper$Helper$location@7b363fc1\n",
+       "\u001b[36mres6_4\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m45\u001b[39m\n",
+       "defined \u001b[32mclass\u001b[39m \u001b[36mmyPrivate\u001b[39m\n",
+       "\u001b[36mmp1\u001b[39m: \u001b[32mmyPrivate\u001b[39m = $sess.cmd6Wrapper$Helper$myPrivate@3da75d3d\n",
+       "\u001b[36mres6_7\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m45\u001b[39m\n",
+       "defined \u001b[32mclass\u001b[39m \u001b[36mPoint2D\u001b[39m\n",
+       "\u001b[36mmpoint\u001b[39m: \u001b[32mPoint2D\u001b[39m = $sess.cmd6Wrapper$Helper$Point2D@126b806\n",
+       "\u001b[36mres6_10\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m3\u001b[39m\n",
+       "\u001b[36mres6_12\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m4\u001b[39m"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "val arr = Array(30,20,10,40,50) \n",
+    "arr.sorted\n",
+    "\n",
+    "class location(var latitue:Int, var lat_direction:Char)\n",
+    "val loc1 = new location(45, 'N')\n",
+    "loc1.latitue\n",
+    "\n",
+    "class myPrivate(var latitue:Int, private var lat_direction:Char)\n",
+    "val mp1 = new myPrivate(45, 'N')\n",
+    "mp1.latitue\n",
+    "//mp1.lat_direction //compile fail\n",
+    "\n",
+    "class Point2D(x:Int, y:Int)\n",
+    "{\n",
+    "    var a : Int = x\n",
+    "    var b : Int = y\n",
+    "    def move(delta_a:Int, delta_b:Int)\n",
+    "    {\n",
+    "        a = a + delta_a\n",
+    "        b = b + delta_b\n",
+    "    }\n",
+    "}\n",
+    "val mpoint = new Point2D(3,4)\n",
+    "\n",
+    "mpoint.a \n",
+    "\n",
+    "mpoint.move(1,1)\n",
+    "\n",
+    "mpoint.a //changed to 4."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Higher Order Function\n",
+    "A higher-order function is a function that takes another function as a parameter, or returns a function."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "2\n",
+      "()\n",
+      "Inside something\n",
+      "x_1 = 5\n",
+      "x_2 = 5\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "defined \u001b[32mfunction\u001b[39m \u001b[36mHello\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36madd\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36msomething\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36mcallByVal\u001b[39m"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "val x = println(2) //x is the reutnr val of the function, which is Unit ().\n",
+    "//So x is x : Unit = ()\n",
+    "println(x) //different from assign a function to a var\n",
+    "\n",
+    "def Hello = {\"Hello, world\"} // func hello with no input arg. {} are optional\n",
+    "\n",
+    "def add(x:Int, y:Int) : Int = x+y //{} are optional.\n",
+    "\n",
+    "//Above are call by value. Value of args are determined before all call the func.\n",
+    "\n",
+    "//Below is call by name, Pass a code block to call, which is executed each time the value is called.\n",
+    "def something() = {\n",
+    "    println(\"Inside something\")\n",
+    "    5 // return val 5\n",
+    "}\n",
+    "\n",
+    "def callByVal(x:Int) = {\n",
+    "    println(\"x_1 = \" + x)\n",
+    "    println(\"x_2 = \" + x)\n",
+    "}\n",
+    "\n",
+    "callByVal(something())\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Inside something\n",
+      "x_1 = 5\n",
+      "Inside something\n",
+      "x_2 = 5\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "defined \u001b[32mfunction\u001b[39m \u001b[36mcallByName\u001b[39m"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "def callByName (x: => Int) = { //only difference x: => Int -- this is how we know it is call by name.\n",
+    "    //get the value of the input each time it 's called. Any time x is seen, it go back to something\n",
+    "    println(\"x_1 = \" + x)\n",
+    "    println(\"x_2 = \" + x) //has to go back to something to get x again.\n",
+    "}\n",
+    "\n",
+    "callByName(something())\n",
+    "\n",
+    "//see the difference here. It go back to run something again.\n",
+    "//ie. each time hit x, run something()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "3\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[36mres9_0\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m6\u001b[39m\n",
+       "\u001b[36mf\u001b[39m: \u001b[32mInt\u001b[39m => \u001b[32mInt\u001b[39m = <function1>\n",
+       "\u001b[36mres9_2\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m6\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36msomeOp\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36mf\u001b[39m\n",
+       "\u001b[36madd\u001b[39m: (\u001b[32mInt\u001b[39m, \u001b[32mInt\u001b[39m) => \u001b[32mInt\u001b[39m = <function2>\n",
+       "\u001b[36mres9_6\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m10\u001b[39m\n",
+       "\u001b[36mres9_7\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m10\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36mgreeting\u001b[39m\n",
+       "\u001b[36mg\u001b[39m: \u001b[32mString\u001b[39m => \u001b[32mString\u001b[39m = <function1>\n",
+       "\u001b[36mgrt1\u001b[39m: \u001b[32mString\u001b[39m => \u001b[32mString\u001b[39m = <function1>\n",
+       "\u001b[36mres9_12\u001b[39m: \u001b[32mString\u001b[39m = \u001b[32m\"Helloa\"\u001b[39m"
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "// Anonymous Function / Lambda Func\n",
+    "\n",
+    "( (x:Int) => x+1 )(5) //func (x:Int) => x+1\n",
+    "val f = (x:Int) => x+1 //assign func to var\n",
+    "f(5)\n",
+    "\n",
+    "def someOp(f:(Int,Int) => Int) : Int = { //takes in a func f, whose signature is (Int,Int) => Int -- two input int, \n",
+    "    //one return int, then func someop returns int\n",
+    "    f(5,5)\n",
+    "}\n",
+    "\n",
+    "def f(a:Int, b:Int):Int = a+b\n",
+    "var add = ( x: Int, y:Int) =>  x+y\n",
+    "someOp(f)\n",
+    "someOp(add)\n",
+    "\n",
+    "\n",
+    "def greeting() = (name:String) => {\"Hello\" + name} //greeting is a func, takes in name, and output\n",
+    "val g = greeting()\n",
+    "//equals below\n",
+    "val grt1 = (name:String) => {\"Hello\" + name} //slightly deferent.\n",
+    "//see this one doesn't conform to function define.\n",
+    "//Func def doesn't have a () with the name greeting.\n",
+    "\n",
+    "val g_p = println(3) //assign return val to g_p\n",
+    "\n",
+    "\n",
+    "//see the differentce?\n",
+    "//greeting(\"a\") -- this is error? why: Func def doesn't have a () with the name greeting. Not defining a func, \n",
+    "//but a ref to a func\n",
+    "g(\"a\") // works ,why?\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[36mdouble\u001b[39m: \u001b[32mInt\u001b[39m => \u001b[32mInt\u001b[39m = <function1>\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36mtriple\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36mhigher_order\u001b[39m\n",
+       "\u001b[36mres10_3\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m8\u001b[39m\n",
+       "\u001b[36mres10_4\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m12\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36msay_hi\u001b[39m\n",
+       "\u001b[36mres10_6\u001b[39m: \u001b[32mString\u001b[39m = \u001b[32m\"Hello fdas\"\u001b[39m\n",
+       "\u001b[36mmsg\u001b[39m: \u001b[32mString\u001b[39m = \u001b[32m\"Hello fdas\"\u001b[39m\n",
+       "\u001b[36my\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m5\u001b[39m\n",
+       "\u001b[36mmultiplier\u001b[39m: \u001b[32mInt\u001b[39m => \u001b[32mInt\u001b[39m = <function1>\n",
+       "\u001b[36mres10_10\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m50\u001b[39m"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "//fast define a function\n",
+    "val double = {i:Int} => i * 2 //defines a func here\n",
+    "\n",
+    "def triple(x: Int):Int = {\n",
+    "    return x * 3\n",
+    "}\n",
+    "def higher_order (x:Int, y:Int=>Int) = y(x) //takes in the value to be doubled x, and y, any function\n",
+    "\n",
+    "higher_order(4,double)\n",
+    "higher_order(4,triple)\n",
+    "\n",
+    "def say_hi = (name:String) => {\n",
+    "    \"Hello\" + \" \" + name\n",
+    "}\n",
+    "//it returns the function when call say_hello\n",
+    "/*\n",
+    "(name:String) => {\n",
+    "    \"Hello\" + \" \" + name\n",
+    "}\n",
+    "*/\n",
+    "\n",
+    "say_hi(\"fdas\")\n",
+    "\n",
+    "var msg = say_hi(\"fdas\")\n",
+    "\n",
+    "var y = 5\n",
+    "val multiplier = (x:Int) => x * y //multiply everything with 5.\n",
+    "multiplier(10)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Condition"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Rains\n",
+      "Not rain\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[36mtoday\u001b[39m: \u001b[32mString\u001b[39m = \u001b[32m\"monday\"\u001b[39m\n",
+       "\u001b[36mtmr\u001b[39m: \u001b[32mString\u001b[39m = \u001b[32m\"tuesday\"\u001b[39m\n",
+       "\u001b[36mb\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m5\u001b[39m\n",
+       "\u001b[36ma\u001b[39m: \u001b[32mAnyVal\u001b[39m = -1\n",
+       "\u001b[36mc\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m-1\u001b[39m\n",
+       "\u001b[36mrate\u001b[39m: \u001b[32mDouble\u001b[39m = \u001b[32m10.5\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36mearn\u001b[39m\n",
+       "\u001b[36mres11_9\u001b[39m: \u001b[32mString\u001b[39m = \u001b[32m\"Salary is: $420.0\"\u001b[39m\n",
+       "\u001b[36mres11_10\u001b[39m: \u001b[32mString\u001b[39m = \u001b[32m\"Salary is $735.0\"\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36mearn1\u001b[39m\n",
+       "\u001b[36mres11_12\u001b[39m: \u001b[32mAny\u001b[39m = Salary is $735.0\n",
+       "\u001b[36mres11_13\u001b[39m: \u001b[32mAny\u001b[39m = 1"
+      ]
+     },
+     "execution_count": 12,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "var today = \"monday\"\n",
+    "if (today == \"monday\")\n",
+    "{\n",
+    "    println(\"Rains\")\n",
+    "}\n",
+    "else\n",
+    "{\n",
+    "    \n",
+    "}\n",
+    "\n",
+    "var tmr = \"tuesday\"\n",
+    "if (tmr == \"monday\")\n",
+    "{\n",
+    "    println(\"Rains\")\n",
+    "}\n",
+    "else\n",
+    "{\n",
+    "    println(\"Not rain\")\n",
+    "}\n",
+    "\n",
+    "var b = 5\n",
+    "var a = if (b == 5) {-1} else {} //If else can also return. But can't use return \n",
+    "var c:Int = if (b == 5) {-1} else {1}\n",
+    "\n",
+    "var rate = 10.5\n",
+    "def earn(s:String, h:Double): String = {\n",
+    "    if (s!= \"y\")\n",
+    "    {\n",
+    "        if (h <= 40)\n",
+    "        {\n",
+    "            return \"Salary is: $\" + h * rate\n",
+    "        }\n",
+    "        else\n",
+    "        {\n",
+    "            return \"Salary is $\" + (40 * rate + (h - 40) * rate * 1.5)\n",
+    "        }\n",
+    "    }\n",
+    "    else\n",
+    "    {\n",
+    "        return \"This is a salaried employee\"\n",
+    "    }\n",
+    "}\n",
+    "earn(\"n\", 40)\n",
+    "earn(\"n\", 60)\n",
+    "\n",
+    "def earn1(s:String, h:Double) = {\n",
+    "    if (s!= \"y\")\n",
+    "    {\n",
+    "        if (h <= 40)\n",
+    "        {\n",
+    "             \"Salary is: $\" + h * rate\n",
+    "        }\n",
+    "        else\n",
+    "        {\n",
+    "             \"Salary is $\" + (40 * rate + (h - 40) * rate * 1.5)\n",
+    "        }\n",
+    "    }\n",
+    "    else\n",
+    "    {\n",
+    "         1\n",
+    "    }\n",
+    "}\n",
+    "// return val is any this time\n",
+    "earn1(\"n\", 60)\n",
+    "earn1(\"y\", 60)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Parallel Collection\n",
+    "Suppose we have a collection of ints and want to double every int. If we split the collection into 2, then it's twice faster. Use 4 cores, 4 times faster.\n",
+    "\n",
+    "For some collection types, using the parallel collection version does not incur any noticeable overhead when compared to using the sequential version. "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Create\n",
+    "1. Convery sequential to parallel"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[36mseq_ran\u001b[39m: \u001b[32mRange\u001b[39m.\u001b[32mInclusive\u001b[39m = \u001b[33mRange\u001b[39m(\n",
+       "  \u001b[32m1\u001b[39m,\n",
+       "  \u001b[32m2\u001b[39m,\n",
+       "  \u001b[32m3\u001b[39m,\n",
+       "  \u001b[32m4\u001b[39m,\n",
+       "  \u001b[32m5\u001b[39m,\n",
+       "  \u001b[32m6\u001b[39m,\n",
+       "  \u001b[32m7\u001b[39m,\n",
+       "  \u001b[32m8\u001b[39m,\n",
+       "  \u001b[32m9\u001b[39m,\n",
+       "  \u001b[32m10\u001b[39m,\n",
+       "  \u001b[32m11\u001b[39m,\n",
+       "\u001b[33m...\u001b[39m\n",
+       "\u001b[36mpar_ran\u001b[39m: \u001b[32mcollection\u001b[39m.\u001b[32mparallel\u001b[39m.\u001b[32mimmutable\u001b[39m.\u001b[32mParRange\u001b[39m = ParRange(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100)"
+      ]
+     },
+     "execution_count": 13,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "var seq_ran = 1 to 100\n",
+    "var par_ran = seq_ran.par // convert to parallel\n",
+    "//it has methods like par_range_iterator, etc.. not included in sequential"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Explicitly Create Parallel collection"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[32mimport \u001b[39m\u001b[36mscala.collection.parallel.immutable.ParVector\n",
+       "\u001b[39m\n",
+       "\u001b[36mpvec200\u001b[39m: \u001b[32mcollection\u001b[39m.\u001b[32mparallel\u001b[39m.\u001b[32mimmutable\u001b[39m.\u001b[32mParVector\u001b[39m[\u001b[32mInt\u001b[39m] = ParVector(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)"
+      ]
+     },
+     "execution_count": 14,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import scala.collection.parallel.immutable.ParVector\n",
+    "val pvec200 = ParVector.range(0,10)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[36mv\u001b[39m: \u001b[32mArray\u001b[39m[\u001b[32mInt\u001b[39m] = \u001b[33mArray\u001b[39m(\u001b[32m1\u001b[39m, \u001b[32m2\u001b[39m, \u001b[32m3\u001b[39m, \u001b[32m4\u001b[39m, \u001b[32m5\u001b[39m, \u001b[32m6\u001b[39m, \u001b[32m7\u001b[39m, \u001b[32m8\u001b[39m, \u001b[32m9\u001b[39m, \u001b[32m10\u001b[39m)\n",
+       "\u001b[36mpv\u001b[39m: \u001b[32mcollection\u001b[39m.\u001b[32mparallel\u001b[39m.\u001b[32mmutable\u001b[39m.\u001b[32mParArray\u001b[39m[\u001b[32mInt\u001b[39m] = ParArray(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)\n",
+       "\u001b[36mres14_2\u001b[39m: \u001b[32mArray\u001b[39m[\u001b[32mInt\u001b[39m] = \u001b[33mArray\u001b[39m(\u001b[32m2\u001b[39m, \u001b[32m4\u001b[39m, \u001b[32m6\u001b[39m, \u001b[32m8\u001b[39m, \u001b[32m10\u001b[39m, \u001b[32m12\u001b[39m, \u001b[32m14\u001b[39m, \u001b[32m16\u001b[39m, \u001b[32m18\u001b[39m, \u001b[32m20\u001b[39m)\n",
+       "\u001b[36mres14_3\u001b[39m: \u001b[32mcollection\u001b[39m.\u001b[32mparallel\u001b[39m.\u001b[32mmutable\u001b[39m.\u001b[32mParArray\u001b[39m[\u001b[32mInt\u001b[39m] = ParArray(2, 4, 6, 8, 10, 12, 14, 16, 18, 20)\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36msquare\u001b[39m\n",
+       "\u001b[36mres14_5\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m16\u001b[39m\n",
+       "\u001b[36mres14_6\u001b[39m: \u001b[32mArray\u001b[39m[\u001b[32mInt\u001b[39m] = \u001b[33mArray\u001b[39m(\u001b[32m1\u001b[39m, \u001b[32m4\u001b[39m, \u001b[32m9\u001b[39m, \u001b[32m16\u001b[39m, \u001b[32m25\u001b[39m, \u001b[32m36\u001b[39m, \u001b[32m49\u001b[39m, \u001b[32m64\u001b[39m, \u001b[32m81\u001b[39m, \u001b[32m100\u001b[39m)\n",
+       "\u001b[36mres14_7\u001b[39m: \u001b[32mcollection\u001b[39m.\u001b[32mparallel\u001b[39m.\u001b[32mmutable\u001b[39m.\u001b[32mParArray\u001b[39m[\u001b[32mInt\u001b[39m] = ParArray(1, 4, 9, 16, 25, 36, 49, 64, 81, 100)"
+      ]
+     },
+     "execution_count": 15,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "val v = (1 to 10).toArray\n",
+    "val pv = v.par //parallel array\n",
+    "\n",
+    "v.map(_ * 2) //underscore as alias of each element\n",
+    "pv.map(_ * 2) //Multiplication number of elements are doubled at a same time\n",
+    "\n",
+    "def square(x:Int) : Int = {\n",
+    "    return x*x\n",
+    "}\n",
+    "\n",
+    "square(4)\n",
+    "\n",
+    "v.map(square(_)) //apply square to each element\n",
+    "pv.map(square(_)) //results merged at the end. Use multicore processors.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Filter collection"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[36mv\u001b[39m: \u001b[32mArray\u001b[39m[\u001b[32mInt\u001b[39m] = \u001b[33mArray\u001b[39m(\n",
+       "  \u001b[32m1\u001b[39m,\n",
+       "  \u001b[32m2\u001b[39m,\n",
+       "  \u001b[32m3\u001b[39m,\n",
+       "  \u001b[32m4\u001b[39m,\n",
+       "  \u001b[32m5\u001b[39m,\n",
+       "  \u001b[32m6\u001b[39m,\n",
+       "  \u001b[32m7\u001b[39m,\n",
+       "  \u001b[32m8\u001b[39m,\n",
+       "  \u001b[32m9\u001b[39m,\n",
+       "  \u001b[32m10\u001b[39m,\n",
+       "  \u001b[32m11\u001b[39m,\n",
+       "\u001b[33m...\u001b[39m\n",
+       "\u001b[36mpv\u001b[39m: \u001b[32mcollection\u001b[39m.\u001b[32mparallel\u001b[39m.\u001b[32mmutable\u001b[39m.\u001b[32mParArray\u001b[39m[\u001b[32mInt\u001b[39m] = ParArray(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212,\u001b[33m...\u001b[39m\n",
+       "\u001b[36mres15_2\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m10000\u001b[39m\n",
+       "\u001b[36mres15_3\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m10000\u001b[39m"
+      ]
+     },
+     "execution_count": 16,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "val v = (1 to 10000).toArray //if no input, no parenthesis\n",
+    "val pv = v.par //parallel\n",
+    "\n",
+    "v.length\n",
+    "pv.length"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[36mpvf\u001b[39m: \u001b[32mcollection\u001b[39m.\u001b[32mparallel\u001b[39m.\u001b[32mmutable\u001b[39m.\u001b[32mParArray\u001b[39m[\u001b[32mInt\u001b[39m] = ParArray(1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1015, 1016, 1017, 1018, 1019, 1020, 1021, 1022, 1023, 1024, 1025, 1026, 1027, 1028, 1029, 1030, 1031, 1032, 1033, 1034, 1035, 1036, 1037, 1038, 1039, 1040, 1041, 1042, 1043, 1044, 1045, 1046, 1047, 1048, 1049, 1050, 1051, 1052, 1053, 1054, 1055, 1056, 1057, 1058, 1059, 1060, 1061, 1062, 1063, 1064, 1065, 1066, 1067, 1068, 1069, 1070, 1071, 1072, 1073, 1074, 1075, 1076, 1077, 1078, 1079, 1080, 1081, 1082, 1083, 1084, 1085, 1086, 1087, 1088, 1089, 1090, 1091, 1092, 1093, 1094, 1095, 1096, 1097, 1098, 1099, 1100, 1101, 1102, 1103, 1104, 1105, 1106, 1107, 1108, 1109, 1110, 1111, 1112, 1113, 1114, 1115, 1116, 1117, 1118, 1119, 1120, 1121, 1122, 1123, 1124, 1125, 1126, 1127, 1128, 1129, 1130, 1131, 1132, 1133, 1134, 1135, 1136, 1137, 1138, 1139, 1140, 1141, 1142, 1143, 1144, 1145, 1146, 1147, 1148, 1149, 1150, 1151, 1152, 1153, 1154, 1155, 1156, 1157, 1158, 115\u001b[33m...\u001b[39m\n",
+       "\u001b[36mres16_1\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m9000\u001b[39m\n",
+       "\u001b[36mpvnf\u001b[39m: \u001b[32mcollection\u001b[39m.\u001b[32mparallel\u001b[39m.\u001b[32mmutable\u001b[39m.\u001b[32mParArray\u001b[39m[\u001b[32mInt\u001b[39m] = ParArray(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212,\u001b[33m...\u001b[39m\n",
+       "\u001b[36mres16_3\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m1000\u001b[39m\n",
+       "defined \u001b[32mfunction\u001b[39m \u001b[36mis_square\u001b[39m\n",
+       "\u001b[36mres16_5\u001b[39m: \u001b[32mcollection\u001b[39m.\u001b[32mparallel\u001b[39m.\u001b[32mmutable\u001b[39m.\u001b[32mParArray\u001b[39m[\u001b[32mInt\u001b[39m] = ParArray(1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361, 400, 441, 484, 529, 576, 625, 676, 729, 784, 841, 900, 961, 1024, 1089, 1156, 1225, 1296, 1369, 1444, 1521, 1600, 1681, 1764, 1849, 1936, 2025, 2116, 2209, 2304, 2401, 2500, 2601, 2704, 2809, 2916, 3025, 3136, 3249, 3364, 3481, 3600, 3721, 3844, 3969, 4096, 4225, 4356, 4489, 4624, 4761, 4900, 5041, 5184, 5329, 5476, 5625, 5776, 5929, 6084, 6241, 6400, 6561, 6724, 6889, 7056, 7225, 7396, 7569, 7744, 7921, 8100, 8281, 8464, 8649, 8836, 9025, 9216, 9409, 9604, 9801, 10000)"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "val pvf = pv.filter(_ > 1000) //filter element > 1000\n",
+    "pvf.length\n",
+    "\n",
+    "val pvnf = pv.filterNot( _ > 1000) // Element not > 1000\n",
+    "pvnf.length\n",
+    "\n",
+    "def is_square(x:Int) : Boolean = {\n",
+    "  val sqrt = math.sqrt(x)\n",
+    "  if (sqrt % 1 == 0)\n",
+    "    return true\n",
+    "  else\n",
+    "    return false\n",
+    "}\n",
+    "\n",
+    "pv.filter(is_square(_)) //return just squares"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## When to use par?\n",
+    "Collections with at least thousands of elements are good candidates.\n",
+    "\n",
+    "Some type of collections, converting between seq and par requires copying\n",
+    "\n",
+    "Avoid side effect: \n",
+    "\n",
+    "What's side effect: Different time you execute the operation you get different ordering results.\n",
+    "\n",
+    "Avoid Nonassociate operations:\n",
+    "If your computation depends on the state, dont use\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Scala with SQL \n",
+    "pass"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Scala with RDD\n",
+    "Spark distributed processing framework, writted in java.\n",
+    "    * Fast processing\n",
+    "    * stream processing\n",
+    "    * Fault toletrant\n",
+    "    * scalable\n",
+    "\n",
+    "Open Spark: spark-shell\n",
+    "\n",
+    "### RDD\n",
+    "    * immutable distributed collection (val not var)\n",
+    "    * Organized into logical partitions\n",
+    "    * fault-tolerant\n",
+    "    * Keep data in memory or disk\n",
+    "    * How to keep resilient? Use legacy graph (which keep track of the operations)\n",
+    "    \n",
+    "Like parallel collections\n",
+    "    * Group of data in same type\n",
+    "    * processed in parallel\n",
+    "    * Faster than sequential\n",
+    "    \n",
+    "Not like parallel collections\n",
+    "    * partitioned by hash function, collections broken into subsets across cores within single server\n",
+    "    * RDD multiple server\n",
+    "    * Within RDD, can be easily persistent to permanent storage\n",
+    "    \n",
+    "Data partitioning:\n",
+    "    * Spark remember which 'chunk', key-value are in each chunk\n",
+    "\n",
+    "Accumulators:\n",
+    "\n",
+    "Broadcasting Varaibles:"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Basic Opeartion in Spark"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "//in spark\n",
+    "\n",
+    "/*\n",
+    "scala> import scala.util.Random\n",
+    "\n",
+    "\n",
+    "scala> val bigRnd = scala.util.Random.shuffle(1 to 100)\n",
+    "\n",
+    "scala> var bigPRange = sc.parallelize(bigRnd) //Map range into RDD. spark context \"sc\"\n",
+    "\n",
+    "scala> bigPRange.mean\n",
+    "\n",
+    "scala> bigPRange.min\n",
+    "\n",
+    "scala> bigPRange.max\n",
+    "\n",
+    "scala> bigPRange.take(2) //take the first2\n",
+    "\n",
+    "scala> val first2 = bigPRange.map(_ * 2).take(2)\n",
+    "\n",
+    "scala> val text = sc.textFile(\"/Users/alex/Desktop/out.html\") // read from local\n",
+    "\n",
+    "scala> text.take(2).foreach(println) //stack together operations\n",
+    "\n",
+    "scala> var lineWithHtml = text.filter(line => line.contains(\"Html\")) // lines contain html\n",
+    "\n",
+    "\n",
+    "*/"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Stats in Spark"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "/*\n",
+    "scala> import scala.util.Random\n",
+    "\n",
+    "scala> import org.apache.spark.mllib.stat.Statistics\n",
+    "\n",
+    "scala> val rng = scala.util.Random.shuffle(1 to 100)\n",
+    "\n",
+    "scala> val rddrng = sc.parallelize(rng)\n",
+    "\n",
+    "scala> var rddrng2 = rddrng.map(_ * 2)\n",
+    "\n",
+    "scala> val x = rddrng2.takeSample(true,20) //take random \n",
+    "\n",
+    "scala> val x = rddrng2.takeSample(true,20,123) //specify the seed\n",
+    "\n",
+    "scala> rddrng2.max\n",
+    "\n",
+    "scala> rddrng2.mean\n",
+    "\n",
+    "scala> rddrng2.stats //number of stats.\n",
+    "\n",
+    "//correlations\n",
+    "scala> val series1 = Array.fill(10000)(Random.nextDouble)\n",
+    "\n",
+    "scala> val series2 = Array.fill(10000)(Random.nextDouble)\n",
+    "\n",
+    "//if truely random, no correlation\n",
+    "\n",
+    "scala> val pseries1 = sc.parallelize(series1)\n",
+    "\n",
+    "scala> val pseries2 = sc.parallelize(series2)\n",
+    "\n",
+    "scala> val myCorrelation:Double = Statistics.corr(pseries1, pseries2, \"pearson\") \n",
+    "myCorrelation: Double = 0.017632888654677197\n",
+    "\n",
+    "//No corr -> number to 0.\n",
+    "// pos corre -> number to 1.\n",
+    "//neg corr -> number to -1.\n",
+    "\n",
+    "//How normal it is? bell shape?\n",
+    "\n",
+    "scala> val disTest = Statistics.kolmogorovSmirnovTest(pseries1, \"norm\", 0, 1)\n",
+    "Kolmogorov-Smirnov test summary:\n",
+    "degrees of freedom = 0\n",
+    "statistic = 0.5000882915796793\n",
+    "pValue = 1.466979870912155E-10\n",
+    "Very strong presumption against null hypothesis: Sample follows theoretical distribution.\n",
+    "\n",
+    "*/"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "// Persist\n",
+    "/*\n",
+    "\n",
+    "val lines = sc.textFile(\"data.txt\")\n",
+    "val lineLengths = lines.map(s => s.length)\n",
+    "val totalLength = lineLengths.reduce((a, b) => a + b)\n",
+    "\n",
+    "//If we also wanted to use lineLengths again later, we could add:\n",
+    "\n",
+    "lineLengths.persist()\n",
+    "\n",
+    "//before the reduce, which would cause lineLengths to be saved in memory after the first time it is computed\n",
+    "*/"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## RDD Wrap Up\n",
+    "    * Distributed data structure\n",
+    "    * single-node cluster for testing"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Create DataFrame"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "//scala> val spark = spark.builder().appName(\"DataframeTest\").getOrCreate() //create a spark session, no longer needed!\n",
+    "\n",
+    "/*\n",
+    "scala> val df_emps = spark.read.option(\"header\",\"true\").csv(\"/Users/alex/UChicago/Dropbox/scala/Learning_Scala/05_01/employee.txt\")\n",
+    "df_emps: org.apache.spark.sql.DataFrame = [id: string, last_name: string ... 7 more fields]\n",
+    "\n",
+    "scala> df_emps.take(10)\n",
+    "res13: Array[org.apache.spark.sql.Row] = Array([1,'Kelley','rkelley0@soundcloud.com','Female','Computers','10/2/2009',67470,'Structural Engineer',2],\n",
+    "\n",
+    "scala> df_emps.show()\n",
+    "+---+------------+--------------------+--------+-------------+------------+------+--------------------+---------+\n",
+    "| id|   last_name|               email|  gender|   department|  start_date|salary|           job_title|region_id|\n",
+    "+---+------------+--------------------+--------+-------------+------------+------+--------------------+---------+\n",
+    "|  1|    'Kelley'|'rkelley0@soundcl...|'Female'|  'Computers'| '10/2/2009'| 67470|'Structural Engin...|        2|\n",
+    "\n",
+    "scala> val df_cr = spark.read.option(\"header\",\"true\").csv(\"/Users/alex/UChicago/Dropbox/scala/Learning_Scala/05_01/country_region.txt\")\n",
+    "df_cr: org.apache.spark.sql.DataFrame = [region_id: string, company_regions: string ... 1 more field]\n",
+    "\n",
+    "scala> df_cr.show()\n",
+    "+---------+-------------------+---------+\n",
+    "|region_id|    company_regions|  country|\n",
+    "+---------+-------------------+---------+\n",
+    "|        1|        'Northeast'|    'USA'|\n",
+    "|        2|        'Southeast'|    'USA'|\n",
+    "|        3|        'Northwest'|    'USA'|\n",
+    "|        4|        'Southwest'|    'USA'|\n",
+    "|        5| 'British Columbia'| 'Canada'|\n",
+    "|        6|           'Quebec'| 'Canada'|\n",
+    "|        7|      'Nova Scotia'| 'Canada'|\n",
+    "+---------+-------------------+---------+\n",
+    "\n",
+    "scala> df_cr.columns\n",
+    "res16: Array[String] = Array(region_id, company_regions, country)\n",
+    "\n",
+    "scala> val df_dd = spark.read.option(\"header\",\"true\").csv(\"/Users/alex/UChicago/Dropbox/scala/Learning_Scala/05_01/dept_div.txt\")\n",
+    "df_dd: org.apache.spark.sql.DataFrame = [department: string, company_division: string]\n",
+    "\n",
+    "scala> df_dd.show()\n",
+    "+-------------+--------------------+\n",
+    "|   department|    company_division|\n",
+    "+-------------+--------------------+\n",
+    "| 'Automotive'|   'Auto & Hardware'|\n",
+    "|       'Baby'|          'Domestic'|\n",
+    "|     'Beauty'|          'Domestic'|\n",
+    "|   'Clothing'|          'Domestic'|\n",
+    "+-------------+--------------------+\n",
+    "*/"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Use Sql to Interact with DF"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "/*\n",
+    "\n",
+    "scala> df_emps.createOrReplaceTempView(\"employees\") // create a view using df_emps that allows you to use sql\n",
+    "\n",
+    "scala> val sqldf_emps = spark.sql(\"Select * from employees limit 2\")\n",
+    "sqldf_emps: org.apache.spark.sql.DataFrame = [id: string, last_name: string ... 7 more fields]\n",
+    "\n",
+    "scala> sqldf_emps.show()\n",
+    "+---+-----------+--------------------+--------+-----------+-----------+------+--------------------+---------+\n",
+    "| id|  last_name|               email|  gender| department| start_date|salary|           job_title|region_id|\n",
+    "+---+-----------+--------------------+--------+-----------+-----------+------+--------------------+---------+\n",
+    "|  1|   'Kelley'|'rkelley0@soundcl...|'Female'|'Computers'|'10/2/2009'| 67470|'Structural Engin...|        2|\n",
+    "|  2|'Armstrong'|'sarmstrong1@info...|  'Male'|   'Sports'|'3/31/2008'| 71869| 'Financial Advisor'|        2|\n",
+    "+---+-----------+--------------------+--------+-----------+-----------+------+--------------------+---------+\n",
+    "\n",
+    "//join df.\n",
+    "scala> val df_joined = df_emps.join(df_cr, \"region_id\")\n",
+    "df_joined: org.apache.spark.sql.DataFrame = [region_id: string, id: string ... 9 more fields]\n",
+    "\n",
+    "scala> df_joined.columns\n",
+    "res24: Array[String] = Array(region_id, id, last_name, email, gender, department, start_date, salary, job_title, company_regions, country)\n",
+    "\n",
+    "scala> df_joined.show(3)\n",
+    "+---------+---+-----------+--------------------+--------+------------+-----------+------+--------------------+---------------+-------+\n",
+    "|region_id| id|  last_name|               email|  gender|  department| start_date|salary|           job_title|company_regions|country|\n",
+    "+---------+---+-----------+--------------------+--------+------------+-----------+------+--------------------+---------------+-------+\n",
+    "|        2|  1|   'Kelley'|'rkelley0@soundcl...|'Female'| 'Computers'|'10/2/2009'| 67470|'Structural Engin...|    'Southeast'|  'USA'|\n",
+    "|        2|  2|'Armstrong'|'sarmstrong1@info...|  'Male'|    'Sports'|'3/31/2008'| 71869| 'Financial Advisor'|    'Southeast'|  'USA'|\n",
+    "|        3|  3|     'Carr'|'fcarr2@woothemes...|  'Male'|'Automotive'|'7/12/2009'|101768|'Recruiting Manager'|    'Northwest'|  'USA'|\n",
+    "+---------+---+-----------+--------------------+--------+------------+-----------+------+--------------------+---------------+-------+\n",
+    "only showing top 3 rows\n",
+    "\n",
+    "//Work with JSON files. load json as DF\n",
+    "scala> import org.apache.spark.sql.SparkSession\n",
+    "scala> val spark1 = SparkSession.builder().appName(\"test1\").getOrCreate() //no longer needed1\n",
+    "\n",
+    "scala> df_json_dd.show()\n",
+    "+--------------------+-------------+\n",
+    "|    company_division|   department|\n",
+    "+--------------------+-------------+\n",
+    "|   'Auto & Hardware'| 'Automotive'|\n",
+    "|          'Domestic'|       'Baby'|\n",
+    "|          'Domestic'|     'Beauty'|\n",
+    "|          'Domestic'|   'Clothing'|\n",
+    "|'Electronic Equip...|  'Computers'|\n",
+    "|'Electronic Equip...|'Electronics'|\n",
+    "|          'Domestic'|      'Games'|\n",
+    "| 'Outdoors & Garden'|     'Garden'|\n",
+    "|          'Domestic'|    'Grocery'|\n",
+    "|          'Domestic'|     'Health'|\n",
+    "|          'Domestic'|       'Home'|\n",
+    "|   'Auto & Hardware'| 'Industrial'|\n",
+    "|           'Fashion'|   'Jewelery'|\n",
+    "|          'Domestic'|       'Kids'|\n",
+    "|     'Entertainment'|     'Movies'|\n",
+    "|     'Entertainment'|      'Music'|\n",
+    "| 'Outdoors & Garden'|   'Outdoors'|\n",
+    "|          'Domestic'|      'Shoes'|\n",
+    "|    'Games & Sports'|     'Sports'|\n",
+    "|   'Auto & Hardware'|      'Tools'|\n",
+    "+--------------------+-------------+\n",
+    "only showing top 20 rows\n",
+    "\n",
+    "*/\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Scale Data Type:\n",
+    "\n",
+    "   * Any\n",
+    "       * AnyVal\n",
+    "           * Int\n",
+    "           * Double\n",
+    "           * Boolean\n",
+    "       * AnyRef\n",
+    "           * String\n",
+    "           * Vector\n",
+    "           * Array"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Anonymous Function\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[36mt\u001b[39m: \u001b[32mInt\u001b[39m => \u001b[32mInt\u001b[39m = <function1>"
+      ]
+     },
+     "execution_count": 18,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "val t = (a:Int) => a+1 //no function name, take in a, return a+1"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Loop"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "5,4,3,2,1,0,\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[36mi\u001b[39m: \u001b[32mInt\u001b[39m = \u001b[32m-1\u001b[39m"
+      ]
+     },
+     "execution_count": 19,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "var i = 5\n",
+    "while (i >= 0 ){\n",
+    "    print(i+\",\")\n",
+    "    i = i-1\n",
+    "}\n",
+    "\n",
+    "println()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "a\n",
+      "b\n",
+      "c\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[36mfruit\u001b[39m: \u001b[32mList\u001b[39m[\u001b[32mString\u001b[39m] = \u001b[33mList\u001b[39m(\u001b[32m\"a\"\u001b[39m, \u001b[32m\"b\"\u001b[39m, \u001b[32m\"c\"\u001b[39m)"
+      ]
+     },
+     "execution_count": 20,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "var fruit = List(\"a\",\"b\",\"c\")\n",
+    "for (f <- fruit)\n",
+    "{\n",
+    "    println(f)\n",
+    "}"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "c\n"
+     ]
+    }
+   ],
+   "source": [
+    "for (f <- fruit if (f.startsWith(\"c\")))\n",
+    "{\n",
+    "    println(f)\n",
+    "}"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "1\n",
+      "2\n",
+      "2\n",
+      "4\n"
+     ]
+    }
+   ],
+   "source": [
+    "for (i <- 1 to 2; j <- 1 to 2) //double for loop\n",
+    "{\n",
+    "    println(i * j)\n",
+    "}\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[36mres22\u001b[39m: \u001b[32mcollection\u001b[39m.\u001b[32mimmutable\u001b[39m.\u001b[32mIndexedSeq\u001b[39m[\u001b[32mInt\u001b[39m] = \u001b[33mVector\u001b[39m(\u001b[32m4\u001b[39m, \u001b[32m16\u001b[39m, \u001b[32m36\u001b[39m, \u001b[32m64\u001b[39m, \u001b[32m100\u001b[39m)"
+      ]
+     },
+     "execution_count": 23,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "//for each even number between 1 and 10, square it\n",
+    "for (n <- 1 to 10; e = n%2; if e==0)    yield n * n //can't use {}\n",
+    "// res37: collection.immutable.IndexedSeq[Int] = Vector(4, 16, 36, 64, 100)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "\u001b[36mlist\u001b[39m: \u001b[32mList\u001b[39m[(\u001b[32mInt\u001b[39m, \u001b[32mInt\u001b[39m)] = \u001b[33mList\u001b[39m((\u001b[32m1\u001b[39m, \u001b[32m2\u001b[39m), (\u001b[32m3\u001b[39m, \u001b[32m4\u001b[39m))\n",
+       "\u001b[36mres23_1\u001b[39m: \u001b[32mList\u001b[39m[\u001b[32mInt\u001b[39m] = \u001b[33mList\u001b[39m(\u001b[32m3\u001b[39m, \u001b[32m7\u001b[39m)"
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "var list = List( (1,2), (3,4))\n",
+    "for ( (a,b) <- list) yield a + b //can't use {}. Yield doesn't support {} !!\n",
+    "//res38_1: List[Int] = List(3, 7)\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Closure"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "/*\n",
+    "\n",
+    "val lines = sc.textFile(\"data.txt\")\n",
+    "val pairs = lines.map(s => (s, 1)) = lines.map(_ => (_, 1))\n",
+    "val counts = pairs.reduceByKey((a, b) => a + b)\n",
+    "\n",
+    "*/"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Scala",
+   "language": "scala",
+   "name": "scala"
+  },
+  "language_info": {
+   "codemirror_mode": "text/x-scala",
+   "file_extension": ".scala",
+   "mimetype": "text/x-scala",
+   "name": "scala211",
+   "nbconvert_exporter": "script",
+   "pygments_lexer": "scala",
+   "version": "2.11.11"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

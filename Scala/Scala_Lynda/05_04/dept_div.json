@@ -1,0 +1,21 @@
+{ "department": "'Automotive'", "company_division": "'Auto & Hardware'" }
+{ "department": "'Baby'", "company_division": "'Domestic'" }
+{ "department": "'Beauty'", "company_division": "'Domestic'" }
+{ "department": "'Clothing'", "company_division": "'Domestic'" }
+{ "department": "'Computers'", "company_division": "'Electronic Equipment'" }
+{ "department": "'Electronics'", "company_division": "'Electronic Equipment'" }
+{ "department": "'Games'", "company_division": "'Domestic'" }
+{ "department": "'Garden'", "company_division": "'Outdoors & Garden'" }
+{ "department": "'Grocery'", "company_division": "'Domestic'" }
+{ "department": "'Health'", "company_division": "'Domestic'" }
+{ "department": "'Home'", "company_division": "'Domestic'" }
+{ "department": "'Industrial'", "company_division": "'Auto & Hardware'" }
+{ "department": "'Jewelery'", "company_division": "'Fashion'" }
+{ "department": "'Kids'", "company_division": "'Domestic'" }
+{ "department": "'Movies'", "company_division": "'Entertainment'" }
+{ "department": "'Music'", "company_division": "'Entertainment'" }
+{ "department": "'Outdoors'", "company_division": "'Outdoors & Garden'" }
+{ "department": "'Shoes'", "company_division": "'Domestic'" }
+{ "department": "'Sports'", "company_division": "'Games & Sports'" }
+{ "department": "'Tools'", "company_division": "'Auto & Hardware'" }
+{ "department": "'Toys'", "company_division": "'Games & Sports'" }
