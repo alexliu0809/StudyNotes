@@ -1,4 +1,6 @@
 # Study Notes For Different Programming Languages
+Mainly for personal use. Feel free to use it at your convenience.
+
 ## Finished
 [Java](./Java)
 
